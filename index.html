@@ -495,22 +495,31 @@
 
     function getHostFromURL() {
       const params = new URLSearchParams(window.location.search);
-      return params.get("host"); // devuelve jesus o vivi
+      const host = (params.get("host") || "").toLowerCase().trim(); // jesus o vivi
+      // default si no viene nada:
+      return host || "vivi";
     }
+
   
-    $("rsvpBtn").addEventListener("click", async ()=>{
-        const msg = buildRsvpMessage();
+      $("rsvpBtn").addEventListener("click", async ()=>{
+      const msg = buildRsvpMessage();
 
-        const hostFromURL = getHostFromURL();
-        const phone = CONFIG.phones[hostFromURL];
+      const hostFromURL = getHostFromURL();      // "jesus" o "vivi"
+      const phoneRaw = CONFIG.phones[hostFromURL];
 
-        if(phone && phone.startsWith("+")){
-          const wa = `https://wa.me/${phone.replace(/\D/g,"")}?text=${encodeURIComponent(msg)}`;
-          window.open(wa, "_blank");
-        } else {
-          toast("Link de invitación no válido.");
-        }
-      });
+      // Limpia a solo dígitos
+      const phoneDigits = (phoneRaw || "").replace(/\D/g,"");
+
+      // Si no hay dígitos suficientes, muestra error
+      if(phoneDigits.length < 10){
+        toast("Número no configurado. Revisa el host del link.");
+        return;
+      }
+
+      const wa = `https://wa.me/${phoneDigits}?text=${encodeURIComponent(msg)}`;
+      window.open(wa, "_blank");
+    });
+
 
 
     // ========= Calendario (.ics) =========
