@@ -465,6 +465,14 @@
     function tick(){
       const now = new Date();
       const diff = CONFIG.start - now;
+      const totalTime = CONFIG.start - new Date(2025, 11, 1); // fecha base aproximada
+      const progress = Math.max(0, Math.min(100, (diff / totalTime) * 100));
+
+      const bar = document.getElementById("energyBar");
+      if(bar){
+        bar.style.width = progress + "%";
+      }
+
 
       if(diff <= 0){
         $("d").textContent = "00";
