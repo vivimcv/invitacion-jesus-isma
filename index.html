@@ -406,8 +406,19 @@
         phones: {
         jesus: "+525546470026",   // ← número de tu novio
          vivi: "+525535762530"    // ← tu número
+              },
+        hosts: {
+              jesus: {
+                displayName: "Jesús Ismael",
+                emoji: "🕷️",
+                showWeb: true
+              },
+              vivi: {
+                displayName: "Vivi",
+                emoji: "💙",
+                showWeb: false
               }
-
+            }
         
       };
 
@@ -440,6 +451,8 @@
     $("addressText").textContent = CONFIG.addressText;
     $("dressText").textContent = CONFIG.dressText;
     $("footer").textContent = "Evento: " + formatDateTime(CONFIG.start);
+    applyHostCustomization();
+
 
     // Maps
     const mapsQuery = encodeURIComponent(`${CONFIG.placeText} ${CONFIG.addressText}`);
@@ -499,6 +512,23 @@
       // default si no viene nada:
       return host || "vivi";
     }
+    function applyHostCustomization() {
+        const hostKey = getHostFromURL();
+        const hostData = CONFIG.hosts[hostKey];
+
+        if (!hostData) return;
+
+        // Cambiar emoji en el título
+        const titleElement = document.querySelector("h1 .swing");
+        titleElement.textContent = `${hostData.emoji} Invitación a mi cumple`;
+
+        // Mostrar u ocultar telaraña
+        const webElement = document.querySelector(".webbg");
+        if (!hostData.showWeb) {
+          webElement.style.display = "none";
+        }
+      }
+
 
   
       $("rsvpBtn").addEventListener("click", async ()=>{
