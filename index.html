@@ -402,7 +402,13 @@
         dressText: "Rojo/Azul (opcional)",
 
         // Pon tu número real o déjalo vacío para que NO abra WhatsApp
-        hostPhoneE164: "+525546470026" // ejemplo: "+5215512345678"
+        //hostPhoneE164: "+525546470026" // ejemplo: "+5215512345678"
+        phones: {
+        jesus: "+525546470026",   // ← número de tu novio
+         vivi: "+525535762530"    // ← tu número
+              }
+
+        
       };
 
 
@@ -487,16 +493,25 @@
       return msg;
     }
 
+    function getHostFromURL() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("host"); // devuelve jesus o vivi
+    }
+  
     $("rsvpBtn").addEventListener("click", async ()=>{
-      const msg = buildRsvpMessage();
-      try{ await navigator.clipboard.writeText(msg); }catch{}
-      toast("RSVP listo (copiado).");
+        const msg = buildRsvpMessage();
 
-      if(CONFIG.hostPhoneE164 && CONFIG.hostPhoneE164.startsWith("+")){
-        const wa = `https://wa.me/${CONFIG.hostPhoneE164.replace(/\D/g,"")}?text=${encodeURIComponent(msg)}`;
-        window.open(wa, "_blank");
-      }
-    });
+        const hostFromURL = getHostFromURL();
+        const phone = CONFIG.phones[hostFromURL];
+
+        if(phone && phone.startsWith("+")){
+          const wa = `https://wa.me/${phone.replace(/\D/g,"")}?text=${encodeURIComponent(msg)}`;
+          window.open(wa, "_blank");
+        } else {
+          toast("Link de invitación no válido.");
+        }
+      });
+
 
     // ========= Calendario (.ics) =========
     function toICSDate(d){
