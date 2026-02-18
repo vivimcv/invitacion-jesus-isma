@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Invitación Jesús Isma 🕷️</title>
+  <style>
+    :root{
+      --red:#e11d48;
+      --red2:#be123c;
+      --blue:#1d4ed8;
+      --blue2:#0b2a6f;
+      --ink:#0b1020;
+      --card:#0b1224cc;
+      --text:#eef2ff;
+      --muted:#b6c2ff;
+      --web:rgba(255,255,255,.14);
+      --gold:#fbbf24;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; min-height:100vh;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color:var(--text);
+      display:grid; place-items:center;
+      background:
+        radial-gradient(900px 600px at 20% 10%, rgba(225,29,72,.35), transparent 60%),
+        radial-gradient(900px 600px at 80% 20%, rgba(29,78,216,.35), transparent 55%),
+        linear-gradient(160deg, #050816, #0b1020 55%, #050816);
+      overflow-x:hidden;
+      padding:22px;
+    }
+
+    /* Telaraña de fondo */
+    .webbg{
+      position:fixed; inset:-40vmax;
+      opacity:.9;
+      pointer-events:none;
+      background:
+        /* círculos (anillos) */
+        repeating-radial-gradient(circle at 50% 35%,
+          transparent 0 18px,
+          var(--web) 18px 19px),
+        /* rayos */
+        repeating-conic-gradient(from 0deg at 50% 35%,
+          transparent 0 8deg,
+          var(--web) 8deg 8.6deg);
+      filter: blur(.2px);
+      transform: rotate(8deg);
+      animation: drift 18s linear infinite;
+      mask-image: radial-gradient(circle at 50% 35%, rgba(0,0,0,1) 0 55%, rgba(0,0,0,.2) 70%, transparent 85%);
+      -webkit-mask-image: radial-gradient(circle at 50% 35%, rgba(0,0,0,1) 0 55%, rgba(0,0,0,.2) 70%, transparent 85%);
+    }
+    @keyframes drift{
+      0%{transform:translate3d(0,0,0) rotate(8deg)}
+      50%{transform:translate3d(-14px,10px,0) rotate(10deg)}
+      100%{transform:translate3d(0,0,0) rotate(8deg)}
+    }
+
+    .wrap{width:min(960px,100%)}
+    .card{
+      position:relative;
+      border-radius:26px;
+      background: linear-gradient(180deg, rgba(11,18,36,.82), rgba(11,18,36,.62));
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow:0 24px 70px rgba(0,0,0,.6);
+      overflow:hidden;
+    }
+
+    /* “Traje” rojo/azul */
+    .stripe{
+      position:absolute; inset:0;
+      background:
+        linear-gradient(115deg, rgba(225,29,72,.30), transparent 35%),
+        linear-gradient(245deg, rgba(29,78,216,.28), transparent 38%),
+        radial-gradient(900px 240px at 50% 0%, rgba(255,255,255,.08), transparent 60%);
+      pointer-events:none;
+    }
+
+    .content{position:relative; padding:26px}
+    .top{
+      display:flex; gap:18px; justify-content:space-between; align-items:flex-start; flex-wrap:wrap;
+    }
+
+    .badge{
+      display:inline-flex; align-items:center; gap:10px;
+      background: rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.16);
+      padding:9px 12px;
+      border-radius:999px;
+      color:var(--muted);
+      font-size:13px;
+      letter-spacing:.2px;
+    }
+    .badge .dot{
+      width:10px;height:10px;border-radius:99px;
+      background: var(--gold);
+      box-shadow:0 0 0 7px rgba(251,191,36,.18);
+    }
+
+    h1{
+      margin:10px 0 8px;
+      font-size: clamp(30px, 4.4vw, 50px);
+      line-height:1.02;
+      text-shadow: 0 10px 22px rgba(0,0,0,.55);
+    }
+
+    .swing{
+      display:inline-block;
+      transform-origin: top center;
+      animation: swing 3.4s ease-in-out infinite;
+    }
+    @keyframes swing{
+      0%,100%{transform:rotate(-2.2deg)}
+      50%{transform:rotate(2.2deg)}
+    }
+
+    .subtitle{
+      margin:0;
+      color:rgba(238,242,255,.85);
+      line-height:1.5;
+    }
+
+    .hero{
+      display:flex; gap:18px; align-items:center;
+    }
+    .mask{
+      width:92px; height:92px; flex:0 0 auto;
+      border-radius:22px;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(255,255,255,.22), transparent 45%),
+        linear-gradient(135deg, var(--red), var(--red2));
+      border:1px solid rgba(255,255,255,.18);
+      box-shadow:0 18px 38px rgba(0,0,0,.45);
+      display:grid; place-items:center;
+      position:relative;
+      overflow:hidden;
+    }
+    /* mini telaraña en la máscara */
+    .mask:before{
+      content:"";
+      position:absolute; inset:-20%;
+      background:
+        repeating-radial-gradient(circle at 50% 45%, transparent 0 10px, rgba(255,255,255,.18) 10px 11px),
+        repeating-conic-gradient(from 0deg at 50% 45%, transparent 0 10deg, rgba(255,255,255,.18) 10deg 10.8deg);
+      opacity:.55;
+      transform:rotate(10deg);
+      mask-image: radial-gradient(circle at 50% 45%, rgba(0,0,0,1) 0 62%, transparent 75%);
+      -webkit-mask-image: radial-gradient(circle at 50% 45%, rgba(0,0,0,1) 0 62%, transparent 75%);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:16px;
+      margin-top:18px;
+    }
+    @media (max-width: 860px){ .grid{grid-template-columns:1fr} }
+
+    .panel{
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.16);
+      border-radius:18px;
+      padding:16px;
+    }
+    .k{color:rgba(182,194,255,.9); font-size:12px; text-transform:uppercase; letter-spacing:.12em}
+    .row{
+      display:flex; gap:12px; flex-wrap:wrap; margin-top:10px;
+    }
+    .item{
+      flex:1 1 190px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      border-radius:14px;
+      padding:12px;
+    }
+    .v{margin-top:6px; font-size:16px}
+
+    .countdown{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:10px;
+      margin-top:12px;
+    }
+    .box{
+      text-align:center;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.18);
+      border-radius:14px;
+      padding:12px 10px;
+    }
+    .num{font-size:24px; font-weight:800}
+    .lab{color:rgba(182,194,255,.85); font-size:12px; margin-top:4px}
+
+    .actions{
+      display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;
+    }
+    button, a.btn{
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.08);
+      color:var(--text);
+      border-radius:14px;
+      padding:12px 14px;
+      cursor:pointer;
+      font-weight:700;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      transition: transform .08s ease, background .2s ease, border-color .2s ease;
+      user-select:none;
+    }
+    button:hover, a.btn:hover{background: rgba(255,255,255,.12)}
+    button:active, a.btn:active{transform:scale(.98)}
+    .primary{
+      background: linear-gradient(135deg, var(--red), var(--red2));
+      border-color: rgba(225,29,72,.5);
+    }
+    .secondary{
+      background: linear-gradient(135deg, var(--blue), var(--blue2));
+      border-color: rgba(29,78,216,.55);
+    }
+
+    input, select{
+      padding:12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.18);
+      color:var(--text);
+      outline:none;
+    }
+
+    .note{margin-top:10px; color:rgba(182,194,255,.9); font-size:13px; line-height:1.45}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace}
+
+    .toast{
+      position:fixed; left:50%; bottom:18px;
+      transform:translateX(-50%);
+      background: rgba(11,18,36,.92);
+      border:1px solid rgba(255,255,255,.18);
+      border-radius:14px;
+      padding:12px 14px;
+      box-shadow:0 18px 40px rgba(0,0,0,.65);
+      display:none;
+      gap:10px;
+      align-items:center;
+      z-index:99;
+      max-width:min(720px,92vw);
+    }
+    .toastDot{width:10px;height:10px;border-radius:99px;background:var(--gold); box-shadow:0 0 0 7px rgba(251,191,36,.18)}
+  </style>
+</head>
+
+<body>
+  <div class="webbg" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <div class="card">
+      <div class="stripe" aria-hidden="true"></div>
+
+      <div class="content">
+        <div class="top">
+          <div class="hero">
+            <div class="mask" aria-hidden="true">
+              <!-- Icono sencillo tipo máscara (SVG) -->
+              <svg width="58" height="58" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                <path d="M32 6c10 0 18 6 22 14 4 8 4 22-2 30-6 8-12 12-20 12S18 58 12 50C6 42 6 28 10 20 14 12 22 6 32 6Z"
+                      fill="rgba(0,0,0,.25)"/>
+                <path d="M20 28c5-6 10-8 12-8s7 2 12 8c-6 4-10 6-12 6s-6-2-12-6Z"
+                      fill="rgba(255,255,255,.92)"/>
+                <path d="M44 28c-5-6-10-8-12-8s-7 2-12 8c6 4 10 6 12 6s6-2 12-6Z"
+                      fill="rgba(255,255,255,.92)"/>
+                <path d="M19 29c6 4 10 6 13 6" stroke="rgba(0,0,0,.55)" stroke-width="2" stroke-linecap="round"/>
+                <path d="M45 29c-6 4-10 6-13 6" stroke="rgba(0,0,0,.55)" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+
+            <div>
+              <div class="badge"><span class="dot"></span><span id="badgeText">¡Tu presencia es súper importante!</span></div>
+              <h1><span class="swing">🕷️ Invitación a mi cumple</span></h1>
+              <p class="subtitle" id="subtitle">¡Ven a celebrar un año más con música, alcohol, la mejor compañía, ustedes y mucha diversión!</p>
+            </div>
+          </div>
+
+          <div class="panel" style="min-width:min(360px,100%)">
+            <div class="k">Cuenta regresiva</div>
+            <div class="countdown" aria-live="polite">
+              <div class="box"><div class="num" id="d">--</div><div class="lab">Días</div></div>
+              <div class="box"><div class="num" id="h">--</div><div class="lab">Horas</div></div>
+              <div class="box"><div class="num" id="m">--</div><div class="lab">Min</div></div>
+              <div class="box"><div class="num" id="s">--</div><div class="lab">Seg</div></div>
+            </div>
+            <div class="note" id="countNote">¡Aparta la fecha! 🕸️</div>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="panel">
+            <div class="k">Detalles del evento</div>
+            <div class="row">
+              <div class="item">
+                <div class="k">🎂 Cumpleañer@</div>
+                <div class="v" id="nameText">Mateo</div>
+              </div>
+              <div class="item">
+                <div class="k">📅 Fecha</div>
+                <div class="v" id="dateText">Sábado 20 de abril</div>
+              </div>
+              <div class="item">
+                <div class="k">🕓 Hora</div>
+                <div class="v" id="timeText">13:00 PM</div>
+              </div>
+              <div class="item">
+                <div class="k">📍 Lugar</div>
+                <div class="v" id="placeText">Embarcadero Las Flores Nativitas”</div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="item">
+                <div class="k">🕸️ Tema</div>
+                <div class="v">Spider-Man</div>
+              </div>
+              <div class="item">
+                <div class="k">👕 Dress code</div>
+                <div class="v" id="dressText">Rojo/Azul (opcional)</div>
+              </div>
+              <div class="item">
+                <div class="k">🗺️ Dirección</div>
+                <div class="v" id="addressText">Canal 236, San Jerónimo, Xochimilco, 16090 Ciudad de México, CDMX</div>
+              </div>
+            </div>
+
+            <div class="note" id="message" style="margin-top:10px">
+              Anticipa tus compras, no queremos que te pierdas la diversión buscando una tienda.
+               La invitación es para ti +1 persona, si vas a invitar a otra persona, avísame, cero mala copas. Solo te pediremos una cooperación de 50 pesos.
+               ¿Espero poder verte!  🕷️🎉
+            </div>
+
+            <div class="actions">
+              <button class="primary" id="rsvpBtn">✅ Confirmar asistencia</button>
+              <button class="secondary" id="icsBtn">📅 Agregar al calendario</button>
+              <a class="btn" id="mapsBtn" target="_blank" rel="noreferrer">🗺️ Abrir en Maps</a>
+            </div>
+
+            <div class="note">
+               <span class="mono"></span> 
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="k"></div>
+            <p class="subtitle" style="margin-top:8px">
+              Escribe tu nombre y confirma tu asistencia en el botón.
+            </p>
+
+            <div style="display:grid; gap:10px; margin-top:12px">
+              <label class="k" for="guestName">Tu nombre</label>
+              <input id="guestName" placeholder="Ej. Vivi" />
+
+              <label class="k" for="guests">¿Cuántas personas?</label>
+              <select id="guests">
+                <option value="1">1</option>
+                <option value="2">2</option>
+              </select>
+
+              <label class="k" for="note">Nota (opcional)</label>
+              <input id="note" placeholder="Ej. Llegamos 5:30 😄" />
+            </div>
+          </div>
+        </div>
+
+        <div class="note mono" id="footer" style="margin-top:14px; opacity:.9"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <div class="toastDot"></div>
+    <div id="toastMsg">Listo</div>
+  </div>
+
+  <script>
+    // ========= CONFIG (edita aquí) =========
+      const CONFIG = {
+        celebrantName: "Jesús Ismael",
+        subtitle: "¡Ven a celebrar un año más con música, alcohol, la mejor compañía, ustedes y mucha diversión!",
+        message: `Anticipa tus compras, no queremos que te pierdas la diversión buscando una tienda.
+      La invitación es para ti +1 persona, si vas a invitar a otra persona, avísame, cero mala copas.
+      Solo te pediremos una cooperación de 50 pesos.
+      ¡Espero poder verte! 🕷️🎉`,
+
+        // Fecha/hora del evento (zona horaria del dispositivo)
+        start: new Date("2026-04-04T13:00:00"),
+        durationMinutes: 180,
+
+        dateText: "Sábado 04 de abril",
+        timeText: "1:00 PM",                 // (recomendado: 13:00 PM no es correcto)
+        placeText: "Embarcadero Las Flores Nativitas",
+        addressText: "Canal 236, San Jerónimo, Xochimilco, 16090 Ciudad de México, CDMX",
+
+        dressText: "Rojo/Azul (opcional)",
+
+        // Pon tu número real o déjalo vacío para que NO abra WhatsApp
+        hostPhoneE164: "+525546470026" // ejemplo: "+5215512345678"
+      };
+
+
+    // ========= Helpers =========
+    const $ = (id) => document.getElementById(id);
+    const pad = (n) => String(n).padStart(2, "0");
+
+    function toast(msg){
+      $("toastMsg").textContent = msg;
+      $("toast").style.display = "flex";
+      clearTimeout(toast._t);
+      toast._t = setTimeout(() => $("toast").style.display = "none", 2600);
+    }
+
+    function formatDateTime(d){
+      return d.toLocaleString("es-MX", {
+        weekday:"long", year:"numeric", month:"long", day:"numeric",
+        hour:"numeric", minute:"2-digit"
+      });
+    }
+
+    // ========= Render =========
+    $("subtitle").textContent = CONFIG.subtitle;
+    $("message").textContent = CONFIG.message;
+    $("nameText").textContent = CONFIG.celebrantName;
+    $("dateText").textContent = CONFIG.dateText;
+    $("timeText").textContent = CONFIG.timeText;
+    $("placeText").textContent = CONFIG.placeText;
+    $("addressText").textContent = CONFIG.addressText;
+    $("dressText").textContent = CONFIG.dressText;
+    $("footer").textContent = "Evento: " + formatDateTime(CONFIG.start);
+
+    // Maps
+    const mapsQuery = encodeURIComponent(`${CONFIG.placeText} ${CONFIG.addressText}`);
+    $("mapsBtn").href = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
+
+    // ========= Countdown =========
+    function tick(){
+      const now = new Date();
+      const diff = CONFIG.start - now;
+
+      if(diff <= 0){
+        $("d").textContent = "00";
+        $("h").textContent = "00";
+        $("m").textContent = "00";
+        $("s").textContent = "00";
+        $("countNote").textContent = "¡Hoy es el día! 🥳🕷️";
+        $("badgeText").textContent = "¡Es hoy!";
+        return;
+      }
+
+      const sec = Math.floor(diff/1000);
+      const days = Math.floor(sec / 86400);
+      const hours = Math.floor((sec % 86400) / 3600);
+      const mins = Math.floor((sec % 3600) / 60);
+      const secs = sec % 60;
+
+      $("d").textContent = pad(days);
+      $("h").textContent = pad(hours);
+      $("m").textContent = pad(mins);
+      $("s").textContent = pad(secs);
+
+      $("countNote").textContent = `Faltan ${days} día(s) para la misión 🕸️`;
+    }
+    tick();
+    setInterval(tick, 1000);
+
+    // ========= RSVP =========
+    function buildRsvpMessage(){
+      const guest = ($("guestName").value || "Invitad@").trim();
+      const count = $("guests").value;
+      const note = ($("note").value || "").trim();
+
+      let msg =
+`🕷️ ¡Hola! Soy ${guest}.
+✅ Confirmo mi asistencia al cumpleaños de ${CONFIG.celebrantName}.
+👥 Somos: ${count}
+📅 ${formatDateTime(CONFIG.start)}
+📍 ${CONFIG.placeText} (${CONFIG.addressText})`;
+
+      if(note) msg += `\n📝 Nota: ${note}`;
+      return msg;
+    }
+
+    $("rsvpBtn").addEventListener("click", async ()=>{
+      const msg = buildRsvpMessage();
+      try{ await navigator.clipboard.writeText(msg); }catch{}
+      toast("RSVP listo (copiado).");
+
+      if(CONFIG.hostPhoneE164 && CONFIG.hostPhoneE164.startsWith("+")){
+        const wa = `https://wa.me/${CONFIG.hostPhoneE164.replace(/\D/g,"")}?text=${encodeURIComponent(msg)}`;
+        window.open(wa, "_blank");
+      }
+    });
+
+    // ========= Calendario (.ics) =========
+    function toICSDate(d){
+      const z = new Date(d.getTime() - d.getTimezoneOffset()*60000);
+      return z.toISOString().replace(/[-:]/g,"").split(".")[0] + "Z";
+    }
+
+    $("icsBtn").addEventListener("click", ()=>{
+      const start = CONFIG.start;
+      const end = new Date(start.getTime() + CONFIG.durationMinutes*60000);
+      const uid = (crypto?.randomUUID ? crypto.randomUUID() : Date.now()+"@spiderman");
+
+      const ics =
+`BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Invitacion Jesús Isma//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:${uid}
+DTSTAMP:${toICSDate(new Date())}
+DTSTART:${toICSDate(start)}
+DTEND:${toICSDate(end)}
+SUMMARY:Cumpleaños Spider-Man de ${CONFIG.celebrantName}
+DESCRIPTION:${CONFIG.message.replace(/\n/g,"\\n")}
+LOCATION:${CONFIG.placeText} - ${CONFIG.addressText}
+END:VEVENT
+END:VCALENDAR`;
+
+      const blob = new Blob([ics], {type:"text/calendar;charset=utf-8"});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `Cumple_SpiderMan_${CONFIG.celebrantName}.ics`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      toast("Calendario descargado 📅");
+    });
+  </script>
+</body>
+</html>
