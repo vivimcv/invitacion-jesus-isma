@@ -353,23 +353,23 @@
           </div>
 
           <div class="panel">
-            <div class="k"></div>
-            <p class="subtitle" style="margin-top:8px">
-              Escribe tu nombre y confirma tu asistencia en el botón.
-            </p>
+            <label class="k" for="guestName">Registro (tu nombre)</label>
+            <input id="guestName" placeholder="Ej. Ismael" />
 
-            <div style="display:grid; gap:10px; margin-top:12px">
-              <label class="k" for="guestName">Tu nombre</label>
-              <input id="guestName" placeholder="Ej. Jesús" />
+            <label class="k" for="guestPhone">Tu número (WhatsApp)</label>
+            <input id="guestPhone" placeholder="Ej. 55 1234 5678" inputmode="tel" />
 
-              <label class="k" for="guests">¿Cuántas personas?</label>
-              <select id="guests">
-                <option value="1">1</option>
-                <option value="2">2</option>
-              </select>
+            <label class="k" for="guests">¿Cuántas personas?</label>
+            <select id="guests">
+              <option value="1">1</option>
+              <option value="2">2</option>
+            </select>
 
-              <label class="k" for="note">Nota (opcional)</label>
-              <input id="note" placeholder="Ej. Llegamos 5:30 😄" />
+            <div id="guestNamesWrap" style="display:grid; gap:10px; margin-top:10px"></div>
+
+            <label class="k" for="note">Nota (opcional)</label>
+            <input id="note" placeholder="Ej. Llegamos 5:30 😄" />
+
             </div>
           </div>
         </div>
@@ -464,6 +464,31 @@
     // 🎵 Música
     $("musicBtn").href = "https://www.youtube.com/watch?v=ApXoWvfEYVU";
 
+    function renderGuestNameInputs(){
+  const wrap = document.getElementById("guestNamesWrap");
+  if(!wrap) return;
+
+  const n = parseInt(document.getElementById("guests").value, 10) || 1;
+  wrap.innerHTML = "";
+
+  for(let i=1; i<=n; i++){
+    const label = document.createElement("label");
+    label.className = "k";
+    label.setAttribute("for", `guestN${i}`);
+    label.textContent = `Nombre invitad@ ${i}`;
+
+    const input = document.createElement("input");
+    input.id = `guestN${i}`;
+    input.placeholder = i === 1 ? "Ej. Ismael" : "Ej. Acompañante";
+    input.style.cssText = "padding:12px;border-radius:14px;border:1px solid rgba(255,255,255,.16);background: rgba(0,0,0,.18);color: var(--text);outline:none;";
+
+    wrap.appendChild(label);
+    wrap.appendChild(input);
+  }
+}
+
+document.getElementById("guests").addEventListener("change", renderGuestNameInputs);
+renderGuestNameInputs();
 
     // ========= Countdown =========
     function tick(){
@@ -505,7 +530,7 @@
     setInterval(tick, 1000);
 
     // ========= RSVP =========
-    function buildRsvpMessage(){
+    /*function buildRsvpMessage(){
       const guest = ($("guestName").value || "Invitad@").trim();
       const count = $("guests").value;
       const note = ($("note").value || "").trim();
@@ -519,7 +544,51 @@
 
       if(note) msg += `\n📝 Nota: ${note}`;
       return msg;
-    }
+    }*/
+   function cleanPhoneDigits(s){
+  return (s || "").replace(/\D/g, "");
+}
+
+function getHostFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  const host = (params.get("host") || "").toLowerCase().trim();
+  return host || "vivi"; // default si abren sin parámetro
+}
+
+function buildRsvpMessage(){
+  const hostKey = getHostFromURL(); // vivi o jesus
+
+  const registro = (document.getElementById("guestName").value || "").trim();
+  const phone = cleanPhoneDigits(document.getElementById("guestPhone").value);
+  const count = document.getElementById("guests").value;
+  const note = (document.getElementById("note").value || "").trim();
+
+  const names = [];
+  const n = parseInt(count, 10) || 1;
+  for(let i=1; i<=n; i++){
+    const v = (document.getElementById(`guestN${i}`)?.value || "").trim();
+    if(v) names.push(v);
+  }
+
+  // Si no llenan "registro", usamos el invitado 1 como respaldo:
+  const registroFinal = registro || names[0] || "Invitad@";
+
+  let msg =
+`📩 Registro de invitación
+Recibiste la invitación de: ${hostKey.toUpperCase()}
+Registro: ${registroFinal}
+Número: ${phone ? phone : "No proporcionado"}
+Invitados: ${count}
+Nombre(s) invitado(s): ${names.length ? names.join(" / ") : "No proporcionado"}
+Asistencia: ✅ Sí
+📅 ${formatDateTime(CONFIG.start)}
+📍 ${CONFIG.placeText} (${CONFIG.addressText})`;
+
+  if(note) msg += `\n📝 Nota: ${note}`;
+
+  return msg;
+}
+
 
     function getHostFromURL() {
       const params = new URLSearchParams(window.location.search);
@@ -546,24 +615,25 @@
 
 
   
-      $("rsvpBtn").addEventListener("click", async ()=>{
-      const msg = buildRsvpMessage();
+      $("rsvpBtn").addEventListener("click", ()=>{
+        const msg = buildRsvpMessage();
 
-      const hostFromURL = getHostFromURL();      // "jesus" o "vivi"
-      const phoneRaw = CONFIG.phones[hostFromURL];
+        const hostFromURL = getHostFromURL();      // "jesus" o "vivi"
+        const phoneRaw = CONFIG.phones[hostFromURL];
+        const phoneDigits = (phoneRaw || "").replace(/\D/g,"");
 
-      // Limpia a solo dígitos
-      const phoneDigits = (phoneRaw || "").replace(/\D/g,"");
+        if(phoneDigits.length < 10){
+          toast("Número del host no configurado.");
+          return;
+        }
 
-      // Si no hay dígitos suficientes, muestra error
-      if(phoneDigits.length < 10){
-        toast("Número no configurado. Revisa el host del link.");
-        return;
-      }
+        // (Opcional) muestra confirmación al invitado en pantalla
+        toast("¡Registro listo! Abriendo WhatsApp…");
 
-      const wa = `https://wa.me/${phoneDigits}?text=${encodeURIComponent(msg)}`;
-      window.open(wa, "_blank");
-    });
+        const wa = `https://wa.me/${phoneDigits}?text=${encodeURIComponent(msg)}`;
+        window.open(wa, "_blank");
+      });
+
 
 
 
