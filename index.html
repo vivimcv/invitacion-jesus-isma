@@ -344,6 +344,7 @@
               <button class="primary" id="rsvpBtn">✅ Confirmar asistencia</button>
               <button class="secondary" id="icsBtn">📅 Agregar al calendario</button>
               <a class="btn" id="mapsBtn" target="_blank" rel="noreferrer">🗺️ Abrir en Maps</a>
+              <a class="btn" id="musicBtn" target="_blank" rel="noreferrer">🎵 Escuchar Sunflower</a>
             </div>
 
             <div class="note">
@@ -460,6 +461,9 @@
     // Maps
     const mapsQuery = encodeURIComponent(`${CONFIG.placeText} ${CONFIG.addressText}`);
     $("mapsBtn").href = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
+    // 🎵 Música
+    $("musicBtn").href = "https://www.youtube.com/watch?v=ApXoWvfEYVU";
+
 
     // ========= Countdown =========
     function tick(){
