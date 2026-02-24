@@ -496,42 +496,49 @@ Solo te pediremos una cooperación de 50 pesos.
   }
 
   // ========= Form dinámico =========
-  function renderGuestNameInputs(){
-    const wrap = $("guestNamesWrap");
-    if(!wrap) return;
+    function renderGuestNameInputs(){
+      const wrap = $("guestNamesWrap");
+      if(!wrap) return;
 
-    const n = parseInt($("guests")?.value || "1", 10) || 1;
-    wrap.innerHTML = "";
+      const n = parseInt($("guests")?.value || "1", 10) || 1;
+      wrap.innerHTML = "";
 
-    for(let i=1; i<=n; i++){
+      // Si es 1 persona, NO pedimos nombres extra
+      if(n === 1){
+        wrap.style.display = "none";
+        return;
+      }
+
+      // Si son 2, pedimos solo el acompañante
+      wrap.style.display = "grid";
+
       const label = document.createElement("label");
       label.className = "k";
-      label.setAttribute("for", `guestN${i}`);
-      label.textContent = `Nombre invitad@ ${i}`;
+      label.setAttribute("for", "guestN2");
+      label.textContent = "Nombre acompañante";
 
       const input = document.createElement("input");
-      input.id = `guestN${i}`;
-      input.placeholder = i === 1 ? "Ej. Ismael" : "Ej. Acompañante";
+      input.id = "guestN2";
+      input.placeholder = "Ej. Acompañante";
 
       wrap.appendChild(label);
       wrap.appendChild(input);
     }
-  }
+    function isFormReady(){
+      const registro = ($("guestName")?.value || "").trim();
+      const phone = ($("guestPhone")?.value || "").trim();
+      const count = parseInt($("guests")?.value || "1", 10) || 1;
 
-  function isFormReady(){
-    const registro = ($("guestName")?.value || "").trim();
-    const phone = ($("guestPhone")?.value || "").trim();
-    const count = parseInt($("guests")?.value || "1", 10) || 1;
+      if(!registro) return false;
+      if(!phone) return false;
 
-    if(!registro) return false;
-    if(!phone) return false;
+      if(count === 2){
+        const acomp = ($("guestN2")?.value || "").trim();
+        if(!acomp) return false;
+      }
 
-    for(let i=1; i<=count; i++){
-      const v = ($(`guestN${i}`)?.value || "").trim();
-      if(!v) return false;
+      return true;
     }
-    return true;
-  }
 
   function updateRsvpVisibility(){
     const wrap = $("rsvpWrap");
@@ -580,10 +587,9 @@ Solo te pediremos una cooperación de 50 pesos.
     const note = ($("note")?.value || "").trim();
 
     const names = [];
-    const n = parseInt(count, 10) || 1;
-    for(let i=1; i<=n; i++){
-      const v = ($(`guestN${i}`)?.value || "").trim();
-      if(v) names.push(v);
+    if(parseInt(count, 10) === 2){
+      const acomp = ($("guestN2")?.value || "").trim();
+      if(acomp) names.push(acomp);
     }
 
     const registroFinal = registro || names[0] || "Invitad@";
@@ -594,8 +600,7 @@ Recibiste la invitación de: ${hostKey.toUpperCase()}
 Registro: ${registroFinal}
 Número: ${phone ? phone : "No proporcionado"}
 Invitados: ${count}
-Nombre(s) invitado(s): ${names.length ? names.join(" / ") : "No proporcionado"}
-Asistencia: ${isAttending() ? "✅ Sí" : "❌ No"}
+Acompañante: ${names.length ? names[0] : "—"}Asistencia: ${isAttending() ? "✅ Sí" : "❌ No"}
 📅 ${formatDateTime(CONFIG.start)}
 📍 ${CONFIG.placeText} (${CONFIG.addressText})`;
 
@@ -656,7 +661,7 @@ Asistencia: ${isAttending() ? "✅ Sí" : "❌ No"}
     $("musicBtn").href = "https://www.youtube.com/watch?v=ApXoWvfEYVU";
 
     // Form dynamic
-    renderGuestNameInputs();
+    //renderGuestNameInputs();
 
     // Listeners form
     $("guests")?.addEventListener("change", ()=>{
