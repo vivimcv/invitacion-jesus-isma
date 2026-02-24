@@ -341,7 +341,7 @@
             </div>
 
             <div class="actions">
-              <button class="primary" id="rsvpBtn">✅ Confirmar asistencia</button>
+             <button class="primary" id="rsvpBtn">✅ Confirmar registro</button>
               <button class="secondary" id="icsBtn">📅 Agregar al calendario</button>
               <a class="btn" id="mapsBtn" target="_blank" rel="noreferrer">🗺️ Abrir en Maps</a>
               <a class="btn" id="musicBtn" target="_blank" rel="noreferrer">🎵 Escuchar Sunflower</a>
@@ -353,6 +353,36 @@
           </div>
 
           <div class="panel">
+                      <!-- Asistencia -->
+          <div class="panel" style="padding:12px; background: rgba(0,0,0,.10);">
+            <div class="k">Asistencia</div>
+
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
+              <label style="display:flex; gap:8px; align-items:center; cursor:pointer;">
+                <input type="radio" name="attend" id="attendYes" value="yes" checked />
+                <span>✅ Sí voy a asistir</span>
+              </label>
+
+              <label style="display:flex; gap:8px; align-items:center; cursor:pointer;">
+                <input type="radio" name="attend" id="attendNo" value="no" />
+                <span>❌ No voy a asistir</span>
+              </label>
+            </div>
+
+            <div class="note" id="attendNote" style="margin-top:10px;">
+               😎 Llena tus datos y confirma tu registro.
+            </div>
+          </div>
+
+          <!-- Confirmación al invitado -->
+          <div class="panel" id="confirmBox" style="display:none; margin-top:10px;">
+            <div class="k">✅ Confirmación</div>
+            <div class="note mono" id="confirmPreview" style="white-space:pre-wrap; margin-top:10px;"></div>
+            <div class="actions" style="margin-top:12px;">
+              <button id="copyConfirmBtn">📋 Copiar confirmación</button>
+              <button id="downloadConfirmBtn">⬇️ Descargar .txt</button>
+            </div>
+          </div>
             <label class="k" for="guestName">Registro (tu nombre)</label>
           <input id="guestName" placeholder="Ej. Ismael" />
 
@@ -402,9 +432,6 @@
         timeText: "1:00 PM",                 // (recomendado: 13:00 PM no es correcto)
         placeText: "Embarcadero Las Flores Nativitas",
         addressText: "Canal 236, San Jerónimo, Xochimilco, 16090 Ciudad de México, CDMX",
-
-        dressText: "Rojo/Azul (opcional)",
-
         // Pon tu número real o déjalo vacío para que NO abra WhatsApp
         //hostPhoneE164: "+525546470026" // ejemplo: "+5215512345678"
         phones: {
@@ -581,7 +608,7 @@ Registro: ${registroFinal}
 Número: ${phone ? phone : "No proporcionado"}
 Invitados: ${count}
 Nombre(s) invitado(s): ${names.length ? names.join(" / ") : "No proporcionado"}
-Asistencia: ✅ Sí
+Asistencia: ${isAttending() ? "✅ Sí" : "❌ No"}
 📅 ${formatDateTime(CONFIG.start)}
 📍 ${CONFIG.placeText} (${CONFIG.addressText})`;
 
@@ -597,6 +624,80 @@ Asistencia: ✅ Sí
       // default si no viene nada:
       return host || "vivi";
     }
+    // ---- Asistencia (mostrar/ocultar botón de confirmar) ----
+function isAttending(){
+  return document.getElementById("attendYes")?.checked === true;
+}
+
+function updateAttendUI(){
+  const btn = document.getElementById("rsvpBtn");
+  const note = document.getElementById("attendNote");
+
+  if(!btn || !note) return;
+
+  if(isAttending()){
+    btn.style.display = "inline-flex";
+    note.textContent = "Perfecto 😎 llena tus datos y confirma tu registro.";
+  } else {
+    btn.style.display = "none";
+    note.textContent = "Gracias por avisar 🙌 No pasa nada. (No se enviará registro).";
+  }
+}
+
+// Listeners para radios
+document.getElementById("attendYes")?.addEventListener("change", updateAttendUI);
+document.getElementById("attendNo")?.addEventListener("change", updateAttendUI);
+updateAttendUI();
+
+
+// ---- Confirmación: mostrar recuadro + copiar/descargar ----
+function showConfirmationBox(text){
+  const box = document.getElementById("confirmBox");
+  const prev = document.getElementById("confirmPreview");
+  if(!box || !prev) return;
+
+  prev.textContent = text;
+  box.style.display = "block";
+}
+
+async function copyText(text){
+  try{
+    await navigator.clipboard.writeText(text);
+    toast("Confirmación copiada ✅");
+  }catch{
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    ta.remove();
+    toast("Confirmación copiada ✅");
+  }
+}
+
+function downloadTextFile(filename, text){
+  const blob = new Blob([text], {type:"text/plain;charset=utf-8"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+document.getElementById("copyConfirmBtn")?.addEventListener("click", ()=>{
+  const text = document.getElementById("confirmPreview")?.textContent || "";
+  if(text) copyText(text);
+});
+
+document.getElementById("downloadConfirmBtn")?.addEventListener("click", ()=>{
+  const text = document.getElementById("confirmPreview")?.textContent || "";
+  if(!text) return;
+  const name = (document.getElementById("guestName")?.value || "confirmacion").trim().replace(/\s+/g,"_");
+  downloadTextFile(`confirmacion_${name}.txt`, text);
+});
     function applyHostCustomization() {
         const hostKey = getHostFromURL();
         const hostData = CONFIG.hosts[hostKey];
@@ -617,9 +718,18 @@ Asistencia: ✅ Sí
 
   
       $("rsvpBtn").addEventListener("click", ()=>{
+        if(!isAttending()){
+          toast("Marcaste que no asistes. No se enviará registro.");
+          return;
+        }
+
         const msg = buildRsvpMessage();
 
-        const hostFromURL = getHostFromURL();      // "jesus" o "vivi"
+        // Mostrar confirmación al invitado
+        showConfirmationBox(msg);
+
+        // Enviar a Vivi o Jesús según host
+        const hostFromURL = getHostFromURL();
         const phoneRaw = CONFIG.phones[hostFromURL];
         const phoneDigits = (phoneRaw || "").replace(/\D/g,"");
 
@@ -627,9 +737,6 @@ Asistencia: ✅ Sí
           toast("Número del host no configurado.");
           return;
         }
-
-        // (Opcional) muestra confirmación al invitado en pantalla
-        toast("¡Registro listo! Abriendo WhatsApp…");
 
         const wa = `https://wa.me/${phoneDigits}?text=${encodeURIComponent(msg)}`;
         window.open(wa, "_blank");
