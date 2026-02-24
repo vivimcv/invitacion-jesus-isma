@@ -354,21 +354,21 @@
 
           <div class="panel">
             <label class="k" for="guestName">Registro (tu nombre)</label>
-            <input id="guestName" placeholder="Ej. Ismael" />
+          <input id="guestName" placeholder="Ej. Ismael" />
 
-            <label class="k" for="guestPhone">Tu número (WhatsApp)</label>
-            <input id="guestPhone" placeholder="Ej. 55 1234 5678" inputmode="tel" />
+          <label class="k" for="guestPhone">Tu número (WhatsApp)</label>
+          <input id="guestPhone" placeholder="Ej. 55 1234 5678" inputmode="tel" />
 
-            <label class="k" for="guests">¿Cuántas personas?</label>
-            <select id="guests">
-              <option value="1">1</option>
-              <option value="2">2</option>
-            </select>
+          <label class="k" for="guests">¿Cuántas personas?</label>
+          <select id="guests">
+            <option value="1">1</option>
+            <option value="2">2</option>
+          </select>
 
-            <div id="guestNamesWrap" style="display:grid; gap:10px; margin-top:10px"></div>
+          <div id="guestNamesWrap" style="display:grid; gap:10px; margin-top:10px"></div>
 
-            <label class="k" for="note">Nota (opcional)</label>
-            <input id="note" placeholder="Ej. Llegamos 5:30 😄" />
+          <label class="k" for="note">Nota (opcional)</label>
+          <input id="note" placeholder="Ej. Llegamos 5:30 😄" />
 
             </div>
           </div>
@@ -464,7 +464,7 @@
     // 🎵 Música
     $("musicBtn").href = "https://www.youtube.com/watch?v=ApXoWvfEYVU";
 
-    function renderGuestNameInputs(){
+function renderGuestNameInputs(){
   const wrap = document.getElementById("guestNamesWrap");
   if(!wrap) return;
 
@@ -489,6 +489,7 @@
 
 document.getElementById("guests").addEventListener("change", renderGuestNameInputs);
 renderGuestNameInputs();
+
 
     // ========= Countdown =========
     function tick(){
