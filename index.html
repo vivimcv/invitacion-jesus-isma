@@ -1,614 +1,179 @@
-<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Invitación Jesús Isma 🕷️</title>
-  <style>
-    :root{
-      --red:#e11d48;
-      --red2:#be123c;
-      --blue:#1d4ed8;
-      --blue2:#0b2a6f;
-      --ink:#0b1020;
-      --card:#0b1224cc;
-      --text:#eef2ff;
-      --muted:#b6c2ff;
-      --web:rgba(255,255,255,.14);
-      --gold:#fbbf24;
+<script>
+  // ========= CONFIG (edita aquí) =========
+  const CONFIG = {
+    emailEndpoint: "https://formspree.io/f/XXXXYYYY", // cámbialo cuando Formspree te lo dé
+
+    celebrantName: "Jesús Ismael",
+    message: `Anticipa tus compras, no queremos que te pierdas la diversión buscando una tienda.
+La invitación es para ti +1 persona, si vas a invitar a otra persona, avísame, cero mala copas.
+Solo te pediremos una cooperación de 50 pesos.
+¡Espero poder verte! 🕷️🎉`,
+
+    start: new Date(2026, 3, 4, 13, 0, 0), // Abril=3
+    durationMinutes: 180,
+
+    dateText: "Sábado 04 de abril",
+    timeText: "1:00 PM",
+    placeText: "Embarcadero Las Flores Nativitas",
+    addressText: "Canal 236, San Jerónimo, Xochimilco, 16090 Ciudad de México, CDMX",
+
+    hosts: {
+      jesus: { emoji: "🕷️", showWeb: true },
+      vivi:  { emoji: "🕸️", showWeb: true }
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0; min-height:100vh;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      color:var(--text);
-      display:grid; place-items:center;
-      background:
-        radial-gradient(900px 600px at 20% 10%, rgba(225,29,72,.35), transparent 60%),
-        radial-gradient(900px 600px at 80% 20%, rgba(29,78,216,.35), transparent 55%),
-        linear-gradient(160deg, #050816, #0b1020 55%, #050816);
-      overflow-x:hidden;
-      padding:22px;
-    }
-
-    /* Telaraña de fondo */
-    .webbg{
-      position:fixed; inset:-40vmax;
-      opacity:.9;
-      pointer-events:none;
-      background:
-        /* círculos (anillos) */
-        repeating-radial-gradient(circle at 50% 35%,
-          transparent 0 18px,
-          var(--web) 18px 19px),
-        /* rayos */
-        repeating-conic-gradient(from 0deg at 50% 35%,
-          transparent 0 8deg,
-          var(--web) 8deg 8.6deg);
-      filter: blur(.2px);
-      transform: rotate(8deg);
-      animation: drift 18s linear infinite;
-      mask-image: radial-gradient(circle at 50% 35%, rgba(0,0,0,1) 0 55%, rgba(0,0,0,.2) 70%, transparent 85%);
-      -webkit-mask-image: radial-gradient(circle at 50% 35%, rgba(0,0,0,1) 0 55%, rgba(0,0,0,.2) 70%, transparent 85%);
-    }
-    @keyframes drift{
-      0%{transform:translate3d(0,0,0) rotate(8deg)}
-      50%{transform:translate3d(-14px,10px,0) rotate(10deg)}
-      100%{transform:translate3d(0,0,0) rotate(8deg)}
-    }
-
-    .wrap{width:min(960px,100%)}
-    .card{
-      position:relative;
-      border-radius:26px;
-      background: linear-gradient(180deg, rgba(11,18,36,.82), rgba(11,18,36,.62));
-      border:1px solid rgba(255,255,255,.14);
-      box-shadow:0 24px 70px rgba(0,0,0,.6);
-      overflow:hidden;
-    }
-
-    /* “Traje” rojo/azul */
-    .stripe{
-      position:absolute; inset:0;
-      background:
-        linear-gradient(115deg, rgba(225,29,72,.30), transparent 35%),
-        linear-gradient(245deg, rgba(29,78,216,.28), transparent 38%),
-        radial-gradient(900px 240px at 50% 0%, rgba(255,255,255,.08), transparent 60%);
-      pointer-events:none;
-    }
-
-    .content{position:relative; padding:26px}
-    .top{
-      display:flex; gap:18px; justify-content:space-between; align-items:flex-start; flex-wrap:wrap;
-    }
-
-    .badge{
-      display:inline-flex; align-items:center; gap:10px;
-      background: rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.16);
-      padding:9px 12px;
-      border-radius:999px;
-      color:var(--muted);
-      font-size:13px;
-      letter-spacing:.2px;
-    }
-    .badge .dot{
-      width:10px;height:10px;border-radius:99px;
-      background: var(--gold);
-      box-shadow:0 0 0 7px rgba(251,191,36,.18);
-    }
-
-    h1{
-      margin:10px 0 8px;
-      font-size: clamp(30px, 4.4vw, 50px);
-      line-height:1.02;
-      text-shadow: 0 10px 22px rgba(0,0,0,.55);
-    }
-
-    .swing{
-      display:inline-block;
-      transform-origin: top center;
-      animation: swing 3.4s ease-in-out infinite;
-    }
-    @keyframes swing{
-      0%,100%{transform:rotate(-2.2deg)}
-      50%{transform:rotate(2.2deg)}
-    }
-
-    .subtitle{
-      margin:0;
-      color:rgba(238,242,255,.85);
-      line-height:1.5;
-    }
-
-    .hero{
-      display:flex; gap:18px; align-items:center;
-    }
-    .mask{
-      width:92px; height:92px; flex:0 0 auto;
-      border-radius:22px;
-      background:
-        radial-gradient(circle at 30% 25%, rgba(255,255,255,.22), transparent 45%),
-        linear-gradient(135deg, var(--red), var(--red2));
-      border:1px solid rgba(255,255,255,.18);
-      box-shadow:0 18px 38px rgba(0,0,0,.45);
-      display:grid; place-items:center;
-      position:relative;
-      overflow:hidden;
-    }
-    /* mini telaraña en la máscara */
-    .mask:before{
-      content:"";
-      position:absolute; inset:-20%;
-      background:
-        repeating-radial-gradient(circle at 50% 45%, transparent 0 10px, rgba(255,255,255,.18) 10px 11px),
-        repeating-conic-gradient(from 0deg at 50% 45%, transparent 0 10deg, rgba(255,255,255,.18) 10deg 10.8deg);
-      opacity:.55;
-      transform:rotate(10deg);
-      mask-image: radial-gradient(circle at 50% 45%, rgba(0,0,0,1) 0 62%, transparent 75%);
-      -webkit-mask-image: radial-gradient(circle at 50% 45%, rgba(0,0,0,1) 0 62%, transparent 75%);
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap:16px;
-      margin-top:18px;
-    }
-    @media (max-width: 860px){ .grid{grid-template-columns:1fr} }
-
-    .panel{
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(0,0,0,.16);
-      border-radius:18px;
-      padding:16px;
-    }
-    .k{color:rgba(182,194,255,.9); font-size:12px; text-transform:uppercase; letter-spacing:.12em}
-    .row{
-      display:flex; gap:12px; flex-wrap:wrap; margin-top:10px;
-    }
-    .item{
-      flex:1 1 190px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      border-radius:14px;
-      padding:12px;
-    }
-    .v{margin-top:6px; font-size:16px}
-
-    .countdown{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:10px;
-      margin-top:12px;
-    }
-    .box{
-      text-align:center;
-      border:1px solid rgba(255,255,255,.16);
-      background: rgba(0,0,0,.18);
-      border-radius:14px;
-      padding:12px 10px;
-    }
-    .num{font-size:24px; font-weight:800}
-    .lab{color:rgba(182,194,255,.85); font-size:12px; margin-top:4px}
-
-    .actions{
-      display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;
-    }
-    button, a.btn{
-      border:1px solid rgba(255,255,255,.16);
-      background: rgba(255,255,255,.08);
-      color:var(--text);
-      border-radius:14px;
-      padding:12px 14px;
-      cursor:pointer;
-      font-weight:700;
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      transition: transform .08s ease, background .2s ease, border-color .2s ease;
-      user-select:none;
-    }
-    button:hover, a.btn:hover{background: rgba(255,255,255,.12)}
-    button:active, a.btn:active{transform:scale(.98)}
-    .primary{
-      background: linear-gradient(135deg, var(--red), var(--red2));
-      border-color: rgba(225,29,72,.5);
-    }
-    .secondary{
-      background: linear-gradient(135deg, var(--blue), var(--blue2));
-      border-color: rgba(29,78,216,.55);
-    }
-
-    input, select{
-      padding:12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.16);
-      background: rgba(0,0,0,.18);
-      color:var(--text);
-      outline:none;
-    }
-
-    .note{margin-top:10px; color:rgba(182,194,255,.9); font-size:13px; line-height:1.45}
-    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace}
-
-    .toast{
-      position:fixed; left:50%; bottom:18px;
-      transform:translateX(-50%);
-      background: rgba(11,18,36,.92);
-      border:1px solid rgba(255,255,255,.18);
-      border-radius:14px;
-      padding:12px 14px;
-      box-shadow:0 18px 40px rgba(0,0,0,.65);
-      display:none;
-      gap:10px;
-      align-items:center;
-      z-index:99;
-      max-width:min(720px,92vw);
-    }
-    .toastDot{width:10px;height:10px;border-radius:99px;background:var(--gold); box-shadow:0 0 0 7px rgba(251,191,36,.18)}
-  </style>
-</head>
-
-<body>
-  <div class="webbg" aria-hidden="true"></div>
-
-  <div class="wrap">
-    <div class="card">
-      <div class="stripe" aria-hidden="true"></div>
-
-      <div class="content">
-        <div class="top">
-          <div class="hero">
-
-            <div class="mask" aria-hidden="true">
-              <img src="Chivas-club-Logo.png" alt="Logo Chivas" style="width:70%; height:auto;">
-            </div>
-
-
-            <div>
-              <div class="badge"><span class="dot"></span><span id="badgeText">¡Tu presencia es súper importante!</span></div>
-              <h1><span class="swing">🕷️ Invitación a mi cumple</span></h1>
-              <div class="k" style="margin:6px 0 4px; color:#a855f7;">
-              🎮 Modo: Battle Royale Activated
-              </div>
-              <p class="subtitle" id="subtitle">
-              ¡Ven a celebrar un año más con música, alcohol y la mejor compañía: ustedes!
-              </p>
-            </div>
-          </div>
-
-          <div class="panel" style="min-width:min(360px,100%)">
-            <div class="k">🪂 Preparando el Drop...</div>
-            <div class="countdown" aria-live="polite">
-              <div class="box"><div class="num" id="d">--</div><div class="lab">Días</div></div>
-              <div class="box"><div class="num" id="h">--</div><div class="lab">Horas</div></div>
-              <div class="box"><div class="num" id="m">--</div><div class="lab">Min</div></div>
-              <div class="box"><div class="num" id="s">--</div><div class="lab">Seg</div></div>
-            </div>
-            <div class="note" id="countNote">¡Aparta la fecha! 🕸️</div>
-            <div style="margin-top:12px;">
-              <div style="height:8px;background:#1f2937;border-radius:8px;overflow:hidden;">
-                <div id="energyBar" style="height:8px;width:100%;background:#a855f7;border-radius:8px;transition:width 0.5s;"></div>
-              </div>
-              <small style="color:#a855f7;">Escudo al 100%</small>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid">
-          <div class="panel">
-            <div class="k">Detalles del evento</div>
-            <div class="row">
-              <div class="item">
-                <div class="k">🎂 Cumpleañer@</div>
-                <div class="v" id="nameText">Mateo</div>
-              </div>
-              <div class="item">
-                <div class="k">📅 Fecha</div>
-                <div class="v" id="dateText">Sábado 20 de abril</div>
-              </div>
-              <div class="item">
-                <div class="k">🕓 Hora</div>
-                <div class="v" id="timeText">13:00 PM</div>
-              </div>
-              <div class="item">
-                <div class="k">📍 Lugar</div>
-                <div class="v" id="placeText">Embarcadero Las Flores Nativitas”</div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="item">
-                <div class="k">🕸️ Tema</div>
-                <div class="v">Spider-Man</div>
-              </div>
-              <div class="item">
-                <div class="k">🗺️ Dirección</div>
-                <div class="v" id="addressText">Canal 236, San Jerónimo, Xochimilco, 16090 Ciudad de México, CDMX</div>
-              </div>
-            </div>
-
-            <div class="note" id="message" style="margin-top:10px">
-              Anticipa tus compras, no queremos que te pierdas la diversión buscando una tienda.
-               La invitación es para ti +1 persona, si vas a invitar a otra persona, avísame, cero mala copas. Solo te pediremos una cooperación de 50 pesos.
-               ¿Espero poder verte!  🕷️🎉
-            </div>
-
-            <div class="actions">
-             <button class="primary" id="rsvpBtn">✅ Confirmar registro</button>
-              <button class="secondary" id="icsBtn">📅 Agregar al calendario</button>
-              <a class="btn" id="mapsBtn" target="_blank" rel="noreferrer">🗺️ Abrir en Maps</a>
-              <a class="btn" id="musicBtn" target="_blank" rel="noreferrer">🎵 Escuchar Sunflower</a>
-            </div>
-
-            <div class="note">
-               <span class="mono"></span> 
-            </div>
-          </div>
-
-          <div class="panel">
-                      <!-- Asistencia -->
-          <div class="panel" style="padding:12px; background: rgba(0,0,0,.10);">
-            <div class="k">Asistencia</div>
-
-            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
-              <label style="display:flex; gap:8px; align-items:center; cursor:pointer;">
-                <input type="radio" name="attend" id="attendYes" value="yes" checked />
-                <span>✅ Sí voy a asistir</span>
-              </label>
-
-              <label style="display:flex; gap:8px; align-items:center; cursor:pointer;">
-                <input type="radio" name="attend" id="attendNo" value="no" />
-                <span>❌ No voy a asistir</span>
-              </label>
-            </div>
-
-            <div class="note" id="attendNote" style="margin-top:10px;">
-               😎 Llena tus datos y confirma tu registro.
-            </div>
-          </div>
-
-          <!-- Confirmación al invitado -->
-          <div class="panel" id="confirmBox" style="display:none; margin-top:10px;">
-            <div class="k">✅ Confirmación</div>
-            <div class="note mono" id="confirmPreview" style="white-space:pre-wrap; margin-top:10px;"></div>
-            <div class="actions" style="margin-top:12px;">
-              <button id="copyConfirmBtn">📋 Copiar confirmación</button>
-            </div>
-          </div>
-            <label class="k" for="guestName">Registro (tu nombre)</label>
-          <input id="guestName" placeholder="Ej. Ismael" />
-
-          <label class="k" for="guestPhone">Tu número (WhatsApp)</label>
-          <input id="guestPhone" placeholder="Ej. 55 1234 5678" inputmode="tel" />
-
-          <label class="k" for="guests">¿Cuántas personas?</label>
-          <select id="guests">
-            <option value="1">1</option>
-            <option value="2">2</option>
-          </select>
-
-          <div id="guestNamesWrap" style="display:grid; gap:10px; margin-top:10px"></div>
-
-          <label class="k" for="note">Nota (opcional)</label>
-          <input id="note" placeholder="Ej. Llegamos 5:30 😄" />
-
-            </div>
-          </div>
-        </div>
-
-        <div class="note mono" id="footer" style="margin-top:14px; opacity:.9"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="toast" id="toast" role="status" aria-live="polite">
-    <div class="toastDot"></div>
-    <div id="toastMsg">Listo</div>
-  </div>
-
-  <script>
-    // ========= CONFIG (edita aquí) =========
-      const CONFIG = {
-        celebrantName: "Jesús Ismael",
-        subtitle: "¡Ven a celebrar un año más con música, alcohol, la mejor compañía, ustedes y mucha diversión!",
-        message: `Anticipa tus compras, no queremos que te pierdas la diversión buscando una tienda.
-      La invitación es para ti +1 persona, si vas a invitar a otra persona, avísame, cero mala copas.
-      Solo te pediremos una cooperación de 50 pesos.
-      ¡Espero poder verte! 🕷️🎉`,
-
-        // Fecha/hora del evento (zona horaria del dispositivo)
-        start: new Date(2026, 3, 4, 13, 0, 0), // Abril = 3
-        durationMinutes: 180,
-
-        dateText: "Sábado 04 de abril",
-        timeText: "1:00 PM",                 // (recomendado: 13:00 PM no es correcto)
-        placeText: "Embarcadero Las Flores Nativitas",
-        addressText: "Canal 236, San Jerónimo, Xochimilco, 16090 Ciudad de México, CDMX",
-        // Pon tu número real o déjalo vacío para que NO abra WhatsApp
-        //hostPhoneE164: "+525546470026" // ejemplo: "+5215512345678"
-        phones: {
-        jesus: "+525546470026",   // ← número de tu novio
-         vivi: "+525535762530"    // ← tu número
-              },
-        hosts: {
-              jesus: {
-                displayName: "Jesús Ismael",
-                emoji: "🕷️",
-                showWeb: true
-              },
-              vivi: {
-                displayName: "Vivi",
-                emoji: "🕸️",
-                showWeb: true
-              }
-            }
-        
-      };
-
-
-    // ========= Helpers =========
-    const $ = (id) => document.getElementById(id);
-    const pad = (n) => String(n).padStart(2, "0");
-
-    function toast(msg){
-      $("toastMsg").textContent = msg;
-      $("toast").style.display = "flex";
-      clearTimeout(toast._t);
-      toast._t = setTimeout(() => $("toast").style.display = "none", 2600);
-    }
-
-    function formatDateTime(d){
-      return d.toLocaleString("es-MX", {
-        weekday:"long", year:"numeric", month:"long", day:"numeric",
-        hour:"numeric", minute:"2-digit"
-      });
-    }
-
-        function applyHostCustomization() {
-        const hostKey = getHostFromURL();
-        const hostData = CONFIG.hosts[hostKey];
-
-        if (!hostData) return;
-
-        // Cambiar emoji en el título
-        const titleElement = document.querySelector("h1 .swing");
-        titleElement.textContent = `${hostData.emoji} Invitación a mi cumple`;
-
-        // Mostrar u ocultar telaraña
-        const webElement = document.querySelector(".webbg");
-        if (!hostData.showWeb) {
-          webElement.style.display = "none";
-        }
-      }
-
-    // ========= Render =========
-    //$("subtitle").textContent = CONFIG.subtitle;
-    $("message").textContent = CONFIG.message;
-    $("nameText").textContent = CONFIG.celebrantName;
-    $("dateText").textContent = CONFIG.dateText;
-    $("timeText").textContent = CONFIG.timeText;
-    $("placeText").textContent = CONFIG.placeText;
-    $("addressText").textContent = CONFIG.addressText;
-    $("dressText").textContent = CONFIG.dressText;
-    $("footer").textContent = "Evento: " + formatDateTime(CONFIG.start);
-    applyHostCustomization();
-
-
-    // Maps
-    const mapsQuery = encodeURIComponent(`${CONFIG.placeText} ${CONFIG.addressText}`);
-    $("mapsBtn").href = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
-    // 🎵 Música
-    $("musicBtn").href = "https://www.youtube.com/watch?v=ApXoWvfEYVU";
-
-function renderGuestNameInputs(){
-  const wrap = document.getElementById("guestNamesWrap");
-  if(!wrap) return;
-
-  const n = parseInt(document.getElementById("guests").value, 10) || 1;
-  wrap.innerHTML = "";
-
-  for(let i=1; i<=n; i++){
-    const label = document.createElement("label");
-    label.className = "k";
-    label.setAttribute("for", `guestN${i}`);
-    label.textContent = `Nombre invitad@ ${i}`;
-
-    const input = document.createElement("input");
-    input.id = `guestN${i}`;
-    input.placeholder = i === 1 ? "Ej. Ismael" : "Ej. Acompañante";
-    input.style.cssText = "padding:12px;border-radius:14px;border:1px solid rgba(255,255,255,.16);background: rgba(0,0,0,.18);color: var(--text);outline:none;";
-
-    wrap.appendChild(label);
-    wrap.appendChild(input);
-  }
-}
-
-document.getElementById("guests").addEventListener("change", renderGuestNameInputs);
-renderGuestNameInputs();
-
-
-    // ========= Countdown =========
-    function tick(){
-      const now = new Date();
-      const diff = CONFIG.start - now;
-      const totalTime = CONFIG.start - new Date(2025, 11, 1); // fecha base aproximada
-      const progress = Math.max(0, Math.min(100, (diff / totalTime) * 100));
-
-      const bar = document.getElementById("energyBar");
-      if(bar){
-        bar.style.width = progress + "%";
-      }
-
-
-      if(diff <= 0){
-        $("d").textContent = "00";
-        $("h").textContent = "00";
-        $("m").textContent = "00";
-        $("s").textContent = "00";
-        $("countNote").textContent = "¡Hoy es el día! 🥳🕷️";
-        $("badgeText").textContent = "¡Es hoy!";
-        return;
-      }
-
-      const sec = Math.floor(diff/1000);
-      const days = Math.floor(sec / 86400);
-      const hours = Math.floor((sec % 86400) / 3600);
-      const mins = Math.floor((sec % 3600) / 60);
-      const secs = sec % 60;
-
-      $("d").textContent = pad(days);
-      $("h").textContent = pad(hours);
-      $("m").textContent = pad(mins);
-      $("s").textContent = pad(secs);
-
-      $("countNote").textContent = `Faltan ${days} día(s) para la misión 🕸️`;
-    }
-    tick();
-    setInterval(tick, 1000);
-
-    // ========= RSVP =========
-    /*function buildRsvpMessage(){
-      const guest = ($("guestName").value || "Invitad@").trim();
-      const count = $("guests").value;
-      const note = ($("note").value || "").trim();
-
-      let msg =
-`🕷️ ¡Hola! Soy ${guest}.
-✅ Confirmo mi asistencia al cumpleaños de ${CONFIG.celebrantName}.
-👥 Somos: ${count}
-📅 ${formatDateTime(CONFIG.start)}
-📍 ${CONFIG.placeText} (${CONFIG.addressText})`;
-
-      if(note) msg += `\n📝 Nota: ${note}`;
-      return msg;
-    }*/
-   function cleanPhoneDigits(s){
-  return (s || "").replace(/\D/g, "");
-}
-
-
-function buildRsvpMessage(){
-  const hostKey = getHostFromURL(); // vivi o jesus
-
-  const registro = (document.getElementById("guestName").value || "").trim();
-  const phone = cleanPhoneDigits(document.getElementById("guestPhone").value);
-  const count = document.getElementById("guests").value;
-  const note = (document.getElementById("note").value || "").trim();
-
-  const names = [];
-  const n = parseInt(count, 10) || 1;
-  for(let i=1; i<=n; i++){
-    const v = (document.getElementById(`guestN${i}`)?.value || "").trim();
-    if(v) names.push(v);
+  };
+
+  // ========= Helpers =========
+  const $ = (id) => document.getElementById(id);
+  const pad = (n) => String(n).padStart(2, "0");
+
+  function toast(msg){
+    $("toastMsg").textContent = msg;
+    $("toast").style.display = "flex";
+    clearTimeout(toast._t);
+    toast._t = setTimeout(() => $("toast").style.display = "none", 2600);
   }
 
-  // Si no llenan "registro", usamos el invitado 1 como respaldo:
-  const registroFinal = registro || names[0] || "Invitad@";
+  function formatDateTime(d){
+    return d.toLocaleString("es-MX", {
+      weekday:"long", year:"numeric", month:"long", day:"numeric",
+      hour:"numeric", minute:"2-digit"
+    });
+  }
 
-  let msg =
+  function cleanPhoneDigits(s){
+    return (s || "").replace(/\D/g, "");
+  }
+
+  function getHostFromURL(){
+    const params = new URLSearchParams(window.location.search);
+    const host = (params.get("host") || "").toLowerCase().trim();
+    return host || "vivi";
+  }
+
+  // ========= UI: Host customization =========
+  function applyHostCustomization(){
+    const hostKey = getHostFromURL();
+    const hostData = CONFIG.hosts[hostKey];
+    if(!hostData) return;
+
+    const titleEl = document.querySelector("h1 .swing");
+    if(titleEl) titleEl.textContent = `${hostData.emoji} Invitación a mi cumple`;
+
+    const webEl = document.querySelector(".webbg");
+    if(webEl && !hostData.showWeb) webEl.style.display = "none";
+  }
+
+  // ========= Asistencia =========
+  function isAttending(){
+    return $("attendYes")?.checked === true;
+  }
+
+  function updateAttendUI(){
+    const note = $("attendNote");
+    if(!note) return;
+
+    if(isAttending()){
+      note.textContent = "😎 Llena tus datos y confirma tu registro.";
+    }else{
+      note.textContent = "Gracias por avisar 🙌 No se enviará registro.";
+    }
+  }
+
+  // ========= Form dinámico =========
+  function renderGuestNameInputs(){
+    const wrap = $("guestNamesWrap");
+    if(!wrap) return;
+
+    const n = parseInt($("guests")?.value || "1", 10) || 1;
+    wrap.innerHTML = "";
+
+    for(let i=1; i<=n; i++){
+      const label = document.createElement("label");
+      label.className = "k";
+      label.setAttribute("for", `guestN${i}`);
+      label.textContent = `Nombre invitad@ ${i}`;
+
+      const input = document.createElement("input");
+      input.id = `guestN${i}`;
+      input.placeholder = i === 1 ? "Ej. Ismael" : "Ej. Acompañante";
+
+      wrap.appendChild(label);
+      wrap.appendChild(input);
+    }
+  }
+
+  function isFormReady(){
+    const registro = ($("guestName")?.value || "").trim();
+    const phone = ($("guestPhone")?.value || "").trim();
+    const count = parseInt($("guests")?.value || "1", 10) || 1;
+
+    if(!registro) return false;
+    if(!phone) return false;
+
+    for(let i=1; i<=count; i++){
+      const v = ($(`guestN${i}`)?.value || "").trim();
+      if(!v) return false;
+    }
+    return true;
+  }
+
+  function updateRsvpVisibility(){
+    const wrap = $("rsvpWrap");
+    if(!wrap) return;
+
+    if(!isAttending()){
+      wrap.style.display = "none";
+      return;
+    }
+
+    wrap.style.display = isFormReady() ? "block" : "none";
+  }
+
+  // ========= Confirmación (recuadro + copiar) =========
+  function showConfirmationBox(text){
+    const box = $("confirmBox");
+    const prev = $("confirmPreview");
+    if(!box || !prev) return;
+
+    prev.textContent = text;
+    box.style.display = "block";
+  }
+
+  async function copyText(text){
+    try{
+      await navigator.clipboard.writeText(text);
+      toast("Confirmación copiada ✅");
+    }catch{
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      ta.remove();
+      toast("Confirmación copiada ✅");
+    }
+  }
+
+  // ========= Construir mensaje =========
+  function buildRsvpMessage(){
+    const hostKey = getHostFromURL();
+
+    const registro = ($("guestName")?.value || "").trim();
+    const phone = cleanPhoneDigits($("guestPhone")?.value || "");
+    const count = $("guests")?.value || "1";
+    const note = ($("note")?.value || "").trim();
+
+    const names = [];
+    const n = parseInt(count, 10) || 1;
+    for(let i=1; i<=n; i++){
+      const v = ($(`guestN${i}`)?.value || "").trim();
+      if(v) names.push(v);
+    }
+
+    const registroFinal = registro || names[0] || "Invitad@";
+
+    let msg =
 `📩 Registro de invitación
 Recibiste la invitación de: ${hostKey.toUpperCase()}
 Registro: ${registroFinal}
@@ -619,120 +184,148 @@ Asistencia: ${isAttending() ? "✅ Sí" : "❌ No"}
 📅 ${formatDateTime(CONFIG.start)}
 📍 ${CONFIG.placeText} (${CONFIG.addressText})`;
 
-  if(note) msg += `\n📝 Nota: ${note}`;
+    if(note) msg += `\n📝 Nota: ${note}`;
+    return msg;
+  }
 
-  return msg;
-}
+  // ========= Countdown + barra =========
+  function tick(){
+    const now = new Date();
+    const diff = CONFIG.start - now;
 
+    // barra (aprox desde hoy -> evento)
+    const totalTime = CONFIG.start - new Date(2025, 11, 1);
+    const progress = Math.max(0, Math.min(100, (diff / totalTime) * 100));
+    const bar = $("energyBar");
+    if(bar) bar.style.width = progress + "%";
 
-    function getHostFromURL() {
-      const params = new URLSearchParams(window.location.search);
-      const host = (params.get("host") || "").toLowerCase().trim(); // jesus o vivi
-      // default si no viene nada:
-      return host || "vivi";
+    if(diff <= 0){
+      $("d").textContent = "00";
+      $("h").textContent = "00";
+      $("m").textContent = "00";
+      $("s").textContent = "00";
+      $("countNote").textContent = "¡Hoy es el día! 🥳🕷️";
+      $("badgeText").textContent = "¡Es hoy!";
+      return;
     }
-    // ---- Asistencia (mostrar/ocultar botón de confirmar) ----
-function isAttending(){
-  return document.getElementById("attendYes")?.checked === true;
-}
 
-function updateAttendUI(){
-  const btn = document.getElementById("rsvpBtn");
-  const note = document.getElementById("attendNote");
+    const sec = Math.floor(diff/1000);
+    const days = Math.floor(sec / 86400);
+    const hours = Math.floor((sec % 86400) / 3600);
+    const mins = Math.floor((sec % 3600) / 60);
+    const secs = sec % 60;
 
-  if(!btn || !note) return;
-
-  if(isAttending()){
-    btn.style.display = "inline-flex";
-    note.textContent = "Perfecto 😎 llena tus datos y confirma tu registro.";
-  } else {
-    btn.style.display = "none";
-    note.textContent = "Gracias por avisar 🙌 No pasa nada. (No se enviará registro).";
+    $("d").textContent = pad(days);
+    $("h").textContent = pad(hours);
+    $("m").textContent = pad(mins);
+    $("s").textContent = pad(secs);
+    $("countNote").textContent = `Faltan ${days} día(s) para la misión 🕸️`;
   }
-}
 
-// Listeners para radios
-document.getElementById("attendYes")?.addEventListener("change", updateAttendUI);
-document.getElementById("attendNo")?.addEventListener("change", updateAttendUI);
-updateAttendUI();
+  // ========= Init (Render + listeners) =========
+  (function init(){
+    // Render base
+    $("message").textContent = CONFIG.message;
+    $("nameText").textContent = CONFIG.celebrantName;
+    $("dateText").textContent = CONFIG.dateText;
+    $("timeText").textContent = CONFIG.timeText;
+    $("placeText").textContent = CONFIG.placeText;
+    $("addressText").textContent = CONFIG.addressText;
+    $("footer").textContent = "Evento: " + formatDateTime(CONFIG.start);
 
+    applyHostCustomization();
 
-// ---- Confirmación: mostrar recuadro + copiar/descargar ----
-function showConfirmationBox(text){
-  const box = document.getElementById("confirmBox");
-  const prev = document.getElementById("confirmPreview");
-  if(!box || !prev) return;
+    // Links
+    const mapsQuery = encodeURIComponent(`${CONFIG.placeText} ${CONFIG.addressText}`);
+    $("mapsBtn").href = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
+    $("musicBtn").href = "https://www.youtube.com/watch?v=ApXoWvfEYVU";
 
-  prev.textContent = text;
-  box.style.display = "block";
-}
+    // Form dynamic
+    renderGuestNameInputs();
 
-async function copyText(text){
-  try{
-    await navigator.clipboard.writeText(text);
-    toast("Confirmación copiada ✅");
-  }catch{
-    const ta = document.createElement("textarea");
-    ta.value = text;
-    document.body.appendChild(ta);
-    ta.select();
-    document.execCommand("copy");
-    ta.remove();
-    toast("Confirmación copiada ✅");
-  }
-}
+    // Listeners form
+    $("guests")?.addEventListener("change", ()=>{
+      renderGuestNameInputs();
+      updateRsvpVisibility();
+    });
 
+    ["guestName","guestPhone","note"].forEach(id=>{
+      $(id)?.addEventListener("input", updateRsvpVisibility);
+    });
 
-document.getElementById("copyConfirmBtn")?.addEventListener("click", ()=>{
-  const text = document.getElementById("confirmPreview")?.textContent || "";
-  if(text) copyText(text);
-});
+    document.addEventListener("input", (e)=>{
+      if(e.target && String(e.target.id).startsWith("guestN")) updateRsvpVisibility();
+    });
 
-document.getElementById("downloadConfirmBtn")?.addEventListener("click", ()=>{
-  const text = document.getElementById("confirmPreview")?.textContent || "";
-  if(!text) return;
-  const name = (document.getElementById("guestName")?.value || "confirmacion").trim().replace(/\s+/g,"_");
-  downloadTextFile(`confirmacion_${name}.txt`, text);
-});
+    // asistencia
+    $("attendYes")?.addEventListener("change", ()=>{
+      updateAttendUI();
+      updateRsvpVisibility();
+    });
+    $("attendNo")?.addEventListener("change", ()=>{
+      updateAttendUI();
+      updateRsvpVisibility();
+    });
+    updateAttendUI();
+    updateRsvpVisibility();
 
+    // Copiar confirmación
+    $("copyConfirmBtn")?.addEventListener("click", ()=>{
+      const text = $("confirmPreview")?.textContent || "";
+      if(text) copyText(text);
+    });
 
+    // Enviar registro (email)
+    $("rsvpBtn")?.addEventListener("click", async ()=>{
+      if(!isAttending()){
+        toast("Marcaste que no asistes. No se enviará registro.");
+        return;
+      }
 
-  
-      $("rsvpBtn").addEventListener("click", ()=>{
-        if(!isAttending()){
-          toast("Marcaste que no asistes. No se enviará registro.");
-          return;
+      const msg = buildRsvpMessage();
+      showConfirmationBox(msg);
+
+      // Si todavía no tienes endpoint real, no mandes nada:
+      if(!CONFIG.emailEndpoint || CONFIG.emailEndpoint.includes("XXXXYYYY")){
+        toast("⚠️ Falta configurar Formspree.");
+        return;
+      }
+
+      const data = new FormData();
+      data.append("mensaje", msg);
+      data.append("host", getHostFromURL());
+      data.append("registro", ($("guestName").value || "").trim());
+      data.append("telefono", ($("guestPhone").value || "").trim());
+      data.append("invitados", $("guests").value);
+
+      try{
+        const res = await fetch(CONFIG.emailEndpoint, {
+          method: "POST",
+          body: data,
+          headers: { "Accept": "application/json" }
+        });
+
+        if(res.ok){
+          toast("✅ Registro enviado por correo");
+        }else{
+          toast("⚠️ No se pudo enviar. Intenta de nuevo.");
         }
+      }catch{
+        toast("⚠️ Sin conexión o error enviando el registro.");
+      }
+    });
 
-        const msg = buildRsvpMessage();
+    // Countdown
+    tick();
+    setInterval(tick, 1000);
 
-        // Mostrar confirmación al invitado
-        showConfirmationBox(msg);
-
-        // Enviar a Vivi o Jesús según host
-        const hostFromURL = getHostFromURL();
-        const phoneRaw = CONFIG.phones[hostFromURL];
-        const phoneDigits = (phoneRaw || "").replace(/\D/g,"");
-
-        if(phoneDigits.length < 10){
-          toast("Número del host no configurado.");
-          return;
-        }
-
-        const wa = `https://wa.me/${phoneDigits}?text=${encodeURIComponent(msg)}`;
-        window.open(wa, "_blank");
-      });
-
-
-
-
-    // ========= Calendario (.ics) =========
+    // Calendario
     function toICSDate(d){
       const z = new Date(d.getTime() - d.getTimezoneOffset()*60000);
       return z.toISOString().replace(/[-:]/g,"").split(".")[0] + "Z";
     }
 
-    $("icsBtn").addEventListener("click", ()=>{
+    $("icsBtn")?.addEventListener("click", ()=>{
       const start = CONFIG.start;
       const end = new Date(start.getTime() + CONFIG.durationMinutes*60000);
       const uid = (crypto?.randomUUID ? crypto.randomUUID() : Date.now()+"@spiderman");
@@ -765,6 +358,5 @@ END:VCALENDAR`;
       URL.revokeObjectURL(url);
       toast("Calendario descargado 📅");
     });
-  </script>
-</body>
-</html>
+  })();
+</script>
