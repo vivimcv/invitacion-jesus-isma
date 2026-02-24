@@ -325,10 +325,6 @@
                 <div class="v">Spider-Man</div>
               </div>
               <div class="item">
-                <div class="k">👕 Dress code</div>
-                <div class="v" id="dressText">Rojo/Azul (opcional)</div>
-              </div>
-              <div class="item">
                 <div class="k">🗺️ Dirección</div>
                 <div class="v" id="addressText">Canal 236, San Jerónimo, Xochimilco, 16090 Ciudad de México, CDMX</div>
               </div>
@@ -380,7 +376,6 @@
             <div class="note mono" id="confirmPreview" style="white-space:pre-wrap; margin-top:10px;"></div>
             <div class="actions" style="margin-top:12px;">
               <button id="copyConfirmBtn">📋 Copiar confirmación</button>
-              <button id="downloadConfirmBtn">⬇️ Descargar .txt</button>
             </div>
           </div>
             <label class="k" for="guestName">Registro (tu nombre)</label>
@@ -425,7 +420,7 @@
       ¡Espero poder verte! 🕷️🎉`,
 
         // Fecha/hora del evento (zona horaria del dispositivo)
-        start: new Date("2026-04-04T13:00:00"),
+        start: new Date(2026, 3, 4, 13, 0, 0), // Abril = 3
         durationMinutes: 180,
 
         dateText: "Sábado 04 de abril",
@@ -471,6 +466,23 @@
         hour:"numeric", minute:"2-digit"
       });
     }
+
+        function applyHostCustomization() {
+        const hostKey = getHostFromURL();
+        const hostData = CONFIG.hosts[hostKey];
+
+        if (!hostData) return;
+
+        // Cambiar emoji en el título
+        const titleElement = document.querySelector("h1 .swing");
+        titleElement.textContent = `${hostData.emoji} Invitación a mi cumple`;
+
+        // Mostrar u ocultar telaraña
+        const webElement = document.querySelector(".webbg");
+        if (!hostData.showWeb) {
+          webElement.style.display = "none";
+        }
+      }
 
     // ========= Render =========
     //$("subtitle").textContent = CONFIG.subtitle;
@@ -577,11 +589,6 @@ renderGuestNameInputs();
   return (s || "").replace(/\D/g, "");
 }
 
-function getHostFromURL() {
-  const params = new URLSearchParams(window.location.search);
-  const host = (params.get("host") || "").toLowerCase().trim();
-  return host || "vivi"; // default si abren sin parámetro
-}
 
 function buildRsvpMessage(){
   const hostKey = getHostFromURL(); // vivi o jesus
@@ -675,17 +682,6 @@ async function copyText(text){
   }
 }
 
-function downloadTextFile(filename, text){
-  const blob = new Blob([text], {type:"text/plain;charset=utf-8"});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  URL.revokeObjectURL(url);
-}
 
 document.getElementById("copyConfirmBtn")?.addEventListener("click", ()=>{
   const text = document.getElementById("confirmPreview")?.textContent || "";
@@ -698,22 +694,7 @@ document.getElementById("downloadConfirmBtn")?.addEventListener("click", ()=>{
   const name = (document.getElementById("guestName")?.value || "confirmacion").trim().replace(/\s+/g,"_");
   downloadTextFile(`confirmacion_${name}.txt`, text);
 });
-    function applyHostCustomization() {
-        const hostKey = getHostFromURL();
-        const hostData = CONFIG.hosts[hostKey];
 
-        if (!hostData) return;
-
-        // Cambiar emoji en el título
-        const titleElement = document.querySelector("h1 .swing");
-        titleElement.textContent = `${hostData.emoji} Invitación a mi cumple`;
-
-        // Mostrar u ocultar telaraña
-        const webElement = document.querySelector(".webbg");
-        if (!hostData.showWeb) {
-          webElement.style.display = "none";
-        }
-      }
 
 
   
