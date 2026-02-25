@@ -263,20 +263,18 @@
       <div class="content">
         <div class="top">
           <div class="hero">
-
             <div class="mask" aria-hidden="true">
               <img src="Chivas-club-Logo.png" alt="Logo Chivas" style="width:70%; height:auto;">
             </div>
-
 
             <div>
               <div class="badge"><span class="dot"></span><span id="badgeText">¡Tu presencia es súper importante!</span></div>
               <h1><span class="swing">🕷️ Invitación a mi cumple</span></h1>
               <div class="k" style="margin:6px 0 4px; color:#a855f7;">
-              🎮 Modo: Battle Royale Activated
+                🎮 Modo: Battle Royale Activated
               </div>
               <p class="subtitle" id="subtitle">
-              ¡Ven a celebrar un año más con música, alcohol y la mejor compañía: ustedes!
+                ¡Ven a celebrar un año más con música, alcohol y la mejor compañía: ustedes!
               </p>
             </div>
           </div>
@@ -309,15 +307,15 @@
               </div>
               <div class="item">
                 <div class="k">📅 Fecha</div>
-                <div class="v" id="dateText">Sábado 20 de abril</div>
+                <div class="v" id="dateText">Sábado 04 de abril</div>
               </div>
               <div class="item">
                 <div class="k">🕓 Hora</div>
-                <div class="v" id="timeText">13:00 PM</div>
+                <div class="v" id="timeText">1:00 PM</div>
               </div>
               <div class="item">
                 <div class="k">📍 Lugar</div>
-                <div class="v" id="placeText">Embarcadero Las Flores Nativitas”</div>
+                <div class="v" id="placeText">Embarcadero Las Flores Nativitas</div>
               </div>
             </div>
 
@@ -334,10 +332,10 @@
 
             <div class="note" id="message" style="margin-top:10px">
               Anticipa tus compras, no queremos que te pierdas la diversión buscando una tienda, así te recuerdo que habrá alimentos como parte de la convivencia.
-               La invitación es para ti +1 persona, si vas a invitar a una persona adicional, avísame. Solo te 
+              La invitación es para ti +1 persona, si vas a invitar a una persona adicional, avísame. Solo te
               pediremos una cooperación de 50 pesos para la cual se ocupará en el pago de la trajinera.
-              
-               ¿Espero poder contar con tu presencia! Los quiere su compa Chuy  🕷️🎉
+
+              ¡Espero poder contar con tu presencia! Los quiere su compa Chuy 🕷️🎉
             </div>
 
             <div class="actions">
@@ -347,61 +345,62 @@
             </div>
 
             <div class="note">
-               <span class="mono"></span> 
+              <span class="mono"></span>
             </div>
           </div>
 
           <div class="panel">
-                      <!-- Asistencia -->
-          <div class="panel" style="padding:12px; background: rgba(0,0,0,.10);">
-            <div class="k">Asistencia</div>
+            <!-- Asistencia -->
+            <div class="panel" style="padding:12px; background: rgba(0,0,0,.10);">
+              <div class="k">Asistencia</div>
 
-            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
-              <label style="display:flex; gap:8px; align-items:center; cursor:pointer;">
-                <input type="radio" name="attend" id="attendYes" value="yes" checked />
-                <span>✅ Sí voy a asistir</span>
-              </label>
+              <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
+                <label style="display:flex; gap:8px; align-items:center; cursor:pointer;">
+                  <input type="radio" name="attend" id="attendYes" value="yes" checked />
+                  <span>✅ Sí voy a asistir</span>
+                </label>
 
-              <label style="display:flex; gap:8px; align-items:center; cursor:pointer;">
-                <input type="radio" name="attend" id="attendNo" value="no" />
-                <span>❌ No voy a asistir</span>
-              </label>
+                <label style="display:flex; gap:8px; align-items:center; cursor:pointer;">
+                  <input type="radio" name="attend" id="attendNo" value="no" />
+                  <span>❌ No voy a asistir</span>
+                </label>
+              </div>
+
+              <div class="note" id="attendNote" style="margin-top:14px;">
+                😎 Llena tus datos para confirmar tu registro.
+              </div>
             </div>
 
-            <div class="note" id="attendNote" style="margin-top:14px;">
-               😎 Llena tus datos para confirmar tu registro.
+            <!-- Confirmación al invitado -->
+            <div class="panel" id="confirmBox" style="display:none; margin-top:10px;">
+              <div class="k">✅ Confirmación</div>
+              <div class="note mono" id="confirmPreview" style="white-space:pre-wrap; margin-top:10px;"></div>
+              <div class="actions" style="margin-top:12px;">
+                <button id="copyConfirmBtn">📋 Copiar confirmación</button>
+              </div>
             </div>
-          </div>
 
-          <!-- Confirmación al invitado -->
-          <div class="panel" id="confirmBox" style="display:none; margin-top:10px;">
-            <div class="k">✅ Confirmación</div>
-            <div class="note mono" id="confirmPreview" style="white-space:pre-wrap; margin-top:10px;"></div>
-            <div class="actions" style="margin-top:12px;">
-              <button id="copyConfirmBtn">📋 Copiar confirmación</button>
-            </div>
-          </div>
             <label class="k" for="guestName">Registro (tu nombre)</label>
-          <input id="guestName" placeholder="Ej. Ismael" />
+            <input id="guestName" placeholder="Ej. Ismael" />
 
-          <label class="k" for="guestPhone">Tu número (WhatsApp)</label>
-          <input id="guestPhone" placeholder="Ej. 55 1234 5678" inputmode="tel" />
+            <label class="k" for="guestPhone">Tu número (WhatsApp)</label>
+            <input id="guestPhone" placeholder="Ej. 55 1234 5678" inputmode="tel" />
 
-          <label class="k" for="guests">¿Cuántas personas?</label>
-          <select id="guests">
-            <option value="1">1</option>
-            <option value="2">2</option>
-          </select>
+            <label class="k" for="guests">¿Cuántas personas?</label>
+            <select id="guests">
+              <option value="1">1</option>
+              <option value="2">2</option>
+            </select>
 
-          <div id="guestNamesWrap" style="display:grid; gap:10px; margin-top:10px"></div>
+            <div id="guestNamesWrap" style="display:grid; gap:10px; margin-top:10px"></div>
 
-          <label class="k" for="note">Nota (opcional)</label>
-          <input id="note" placeholder="Ej. Llegamos 5:30 😄" />
-          <div id="rsvpWrap" style="display:none; margin-top:16px;">
-            <button class="primary" id="rsvpBtn" style="width:100%;">
-              ✅ Confirmar registro
-            </button>
-          </div>
+            <label class="k" for="note">Nota (opcional)</label>
+            <input id="note" placeholder="Ej. Llegamos 5:30 😄" />
+
+            <div id="rsvpWrap" style="display:none; margin-top:16px;">
+              <button class="primary" id="rsvpBtn" style="width:100%;">
+                ✅ Confirmar registro
+              </button>
             </div>
           </div>
         </div>
@@ -417,89 +416,90 @@
   </div>
 
   <script>
-  // ========= CONFIG (edita aquí) =========
-  const CONFIG = {
-    emailEndpoint: "https://formspree.io/f/meelvlvy", // cámbialo cuando Formspree te lo dé
+    // ========= CONFIG (edita aquí) =========
+    const CONFIG = {
+      emailEndpoint: "https://formspree.io/f/meelvlvy",
 
-    celebrantName: "Jesús Ismael",
-    message: ` Anticipa tus compras, no queremos que te pierdas la diversión buscando una tienda, asímismo te recuerdo que habrá alimentos como parte de la convivencia.
-               La invitación es para ti +1 persona, si vas a invitar a una persona adicional, avísame. 
-               Solo te pediremos una cooperación de $50 pesos, la cual se ocupará en el pago de la trajinera.
-               ¿Espero poder contar con tu presencia! Los quiere su compa Chuy  🕷️🎉`,
+      celebrantName: "Jesús Ismael",
+      message: `Anticipa tus compras, no queremos que te pierdas la diversión buscando una tienda, asimismo te recuerdo que habrá alimentos como parte de la convivencia.
+La invitación es para ti +1 persona, si vas a invitar a una persona adicional, avísame.
+Solo te pediremos una cooperación de $50 pesos, la cual se ocupará en el pago de la trajinera.
+¡Espero poder contar con tu presencia! Los quiere su compa Chuy 🕷️🎉`,
 
-    start: new Date(2026, 3, 4, 13, 0, 0), // Abril=3
-    durationMinutes: 180,
+      start: new Date(2026, 3, 4, 13, 0, 0), // Abril=3 (0=Enero)
+      durationMinutes: 180,
 
-    dateText: "Sábado 04 de abril",
-    timeText: "1:00 PM",
-    placeText: "Embarcadero Las Flores Nativitas",
-    addressText: "Canal 236, San Jerónimo, Xochimilco, 16090 Ciudad de México, CDMX",
+      dateText: "Sábado 04 de abril",
+      timeText: "1:00 PM",
+      placeText: "Embarcadero Las Flores Nativitas",
+      addressText: "Canal 236, San Jerónimo, Xochimilco, 16090 Ciudad de México, CDMX",
 
-    hosts: {
-      jesus: { emoji: "🕷️", showWeb: true },
-      vivi:  { emoji: "🕸️", showWeb: true }
+      hosts: {
+        jesus: { emoji: "🕷️", showWeb: true },
+        vivi:  { emoji: "🕸️", showWeb: true }
+      }
+    };
+
+    // ========= Helpers =========
+    const $ = (id) => document.getElementById(id);
+    const pad = (n) => String(n).padStart(2, "0");
+
+    function toast(msg){
+      $("toastMsg").textContent = msg;
+      $("toast").style.display = "flex";
+      clearTimeout(toast._t);
+      toast._t = setTimeout(() => $("toast").style.display = "none", 2600);
     }
-  };
 
-  // ========= Helpers =========
-  const $ = (id) => document.getElementById(id);
-  const pad = (n) => String(n).padStart(2, "0");
+    function formatDateTime(d){
+      return d.toLocaleString("es-MX", {
+        weekday:"long", year:"numeric", month:"long", day:"numeric",
+        hour:"numeric", minute:"2-digit"
+      });
+    }
 
-  function toast(msg){
-    $("toastMsg").textContent = msg;
-    $("toast").style.display = "flex";
-    clearTimeout(toast._t);
-    toast._t = setTimeout(() => $("toast").style.display = "none", 2600);
-  }
+    function cleanPhoneDigits(s){
+      return (s || "").replace(/\D/g, "");
+    }
 
-  function formatDateTime(d){
-    return d.toLocaleString("es-MX", {
-      weekday:"long", year:"numeric", month:"long", day:"numeric",
-      hour:"numeric", minute:"2-digit"
-    });
-  }
+    function getHostFromURL(){
+      const params = new URLSearchParams(window.location.search);
+      const host = (params.get("host") || "").toLowerCase().trim();
+      return host || "vivi";
+    }
 
-  function cleanPhoneDigits(s){
-    return (s || "").replace(/\D/g, "");
-  }
+    // ========= UI: Host customization =========
+    function applyHostCustomization(){
+      const hostKey = getHostFromURL();
+      const hostData = CONFIG.hosts[hostKey];
+      if(!hostData) return;
 
-  function getHostFromURL(){
-    const params = new URLSearchParams(window.location.search);
-    const host = (params.get("host") || "").toLowerCase().trim();
-    return host || "vivi";
-  }
+      const titleEl = document.querySelector("h1 .swing");
+      if(titleEl) titleEl.textContent = `${hostData.emoji} Invitación a mi cumple`;
 
-  // ========= UI: Host customization =========
-  function applyHostCustomization(){
-    const hostKey = getHostFromURL();
-    const hostData = CONFIG.hosts[hostKey];
-    if(!hostData) return;
+      const webEl = document.querySelector(".webbg");
+      if(webEl && !hostData.showWeb) webEl.style.display = "none";
+    }
 
-    const titleEl = document.querySelector("h1 .swing");
-    if(titleEl) titleEl.textContent = `${hostData.emoji} Invitación a mi cumple`;
+    // ========= Asistencia =========
+    function isAttending(){
+      return $("attendYes")?.checked === true;
+    }
 
-    const webEl = document.querySelector(".webbg");
-    if(webEl && !hostData.showWeb) webEl.style.display = "none";
-  }
+    function updateAttendUI(){
+      const note = $("attendNote");
+      if(!note) return;
 
-  // ========= Asistencia =========
-  function isAttending(){
-    return $("attendYes")?.checked === true;
-  }
+      if(isAttending()){
+        note.textContent = "😎 Llena tus datos y confirma tu registro.";
+        note.style.fontSize = "24px";
+      }else{
+        note.textContent = "🙏 Gracias por avisar. Escribe tu nombre para registrar que no asistirás.";
+        note.style.fontSize = "";
+      }
+    }
 
-  function updateAttendUI(){
-  const note = $("attendNote");
-  if(!note) return;
-
-  if(isAttending()){
-    note.textContent = "😎 Llena tus datos y confirma tu registro.";
-    note.style.fontSize = "24px";   // Cambia el número al tamaño que quieras
-  }else{
-    note.textContent = "🙏 Gracias por avisar. Escribe tu nombre para registrar que no asistirás.";
-  }
-}
-
-  // ========= Form dinámico =========
+    // ========= Form dinámico =========
     function renderGuestNameInputs(){
       const wrap = $("guestNamesWrap");
       if(!wrap) return;
@@ -528,250 +528,248 @@
       wrap.appendChild(label);
       wrap.appendChild(input);
     }
+
     function isFormReady(){
-  const registro = ($("guestName")?.value || "").trim();
-  const phone = ($("guestPhone")?.value || "").trim();
-  const count = parseInt($("guests")?.value || "1", 10) || 1;
+      const registro = ($("guestName")?.value || "").trim();
+      const phoneRaw = ($("guestPhone")?.value || "").trim();
+      const count = parseInt($("guests")?.value || "1", 10) || 1;
 
-  // SIEMPRE pedimos al menos el nombre de registro
-  if(!registro) return false;
+      // SIEMPRE pedimos al menos el nombre de registro
+      if(!registro) return false;
 
-  // Si NO asiste: con el nombre basta (teléfono opcional)
-  if(!isAttending()){
-    return true;
-  }
+      // Si NO asiste: con el nombre basta (teléfono opcional)
+      if(!isAttending()){
+        return true;
+      }
 
-  // Si SÍ asiste: pedimos también teléfono
-  if(!phone) return false;
+      // Si SÍ asiste: pedimos también teléfono (mínimo 10 dígitos recomendado)
+      const digits = cleanPhoneDigits(phoneRaw);
+      if(!digits || digits.length < 10) return false;
 
-  // Si son 2: pide acompañante (solo si tú lo estás usando)
-  if(count === 2){
-    const acomp = ($("guestN2")?.value || "").trim();
-    if(!acomp) return false;
-  }
+      // Si son 2: pide acompañante
+      if(count === 2){
+        const acomp = ($("guestN2")?.value || "").trim();
+        if(!acomp) return false;
+      }
 
-  return true;
-}
-
-  function updateRsvpVisibility(){
-  const wrap = $("rsvpWrap");
-  const btn = $("rsvpBtn");
-  if(!wrap || !btn) return;
-
-  if(isAttending()){
-    btn.textContent = "✅ Confirmar registro";
-  }else{
-    btn.textContent = "❌ Enviar aviso de no asistencia";
-  }
-
-  wrap.style.display = isFormReady() ? "block" : "none";
-}
-
-  // ========= Confirmación (recuadro + copiar) =========
-  function showConfirmationBox(text){
-    const box = $("confirmBox");
-    const prev = $("confirmPreview");
-    if(!box || !prev) return;
-
-    prev.textContent = text;
-    box.style.display = "block";
-  }
-
-  async function copyText(text){
-    try{
-      await navigator.clipboard.writeText(text);
-      toast("Confirmación copiada ✅");
-    }catch{
-      const ta = document.createElement("textarea");
-      ta.value = text;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand("copy");
-      ta.remove();
-      toast("Confirmación copiada ✅");
-    }
-  }
-
-  // ========= Construir mensaje =========
-  function buildRsvpMessage(){
-    const hostKey = getHostFromURL();
-
-    const registro = ($("guestName")?.value || "").trim();
-    const phone = cleanPhoneDigits($("guestPhone")?.value || "");
-    const count = $("guests")?.value || "1";
-    const note = ($("note")?.value || "").trim();
-
-    const names = [];
-    if(parseInt(count, 10) === 2){
-      const acomp = ($("guestN2")?.value || "").trim();
-      if(acomp) names.push(acomp);
+      return true;
     }
 
-    const registroFinal = registro || names[0] || "Invitad@";
+    function updateRsvpVisibility(){
+      const wrap = $("rsvpWrap");
+      const btn = $("rsvpBtn");
+      if(!wrap || !btn) return;
 
-    let msg =
+      btn.textContent = isAttending()
+        ? "✅ Confirmar registro"
+        : "❌ Enviar aviso de no asistencia";
+
+      wrap.style.display = isFormReady() ? "block" : "none";
+    }
+
+    // ========= Confirmación (recuadro + copiar) =========
+    function showConfirmationBox(text){
+      const box = $("confirmBox");
+      const prev = $("confirmPreview");
+      if(!box || !prev) return;
+
+      prev.textContent = text;
+      box.style.display = "block";
+    }
+
+    async function copyText(text){
+      try{
+        await navigator.clipboard.writeText(text);
+        toast("Confirmación copiada ✅");
+      }catch{
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+        toast("Confirmación copiada ✅");
+      }
+    }
+
+    // ========= Construir mensaje =========
+    function buildRsvpMessage(){
+      const hostKey = getHostFromURL();
+
+      const registro = ($("guestName")?.value || "").trim();
+      const phone = cleanPhoneDigits($("guestPhone")?.value || "");
+      const count = $("guests")?.value || "1";
+      const note = ($("note")?.value || "").trim();
+
+      const names = [];
+      if(parseInt(count, 10) === 2){
+        const acomp = ($("guestN2")?.value || "").trim();
+        if(acomp) names.push(acomp);
+      }
+
+      const registroFinal = registro || names[0] || "Invitad@";
+
+      let msg =
 `📩 Registro de invitación
 Recibiste la invitación de: ${hostKey.toUpperCase()}
 Registro: ${registroFinal}
 Número: ${phone ? phone : "No proporcionado"}
 Invitados: ${count}
-Acompañante: ${names.length ? names[0] : "—"}Asistencia: ${isAttending() ? "✅ Sí" : "❌ No"}
+Acompañante: ${names.length ? names[0] : "—"}
+Asistencia: ${isAttending() ? "✅ Sí" : "❌ No"}
 📅 ${formatDateTime(CONFIG.start)}
 📍 ${CONFIG.placeText} (${CONFIG.addressText})`;
 
-    if(note) msg += `\n📝 Nota: ${note}`;
-    return msg;
-  }
-
-  // ========= Countdown + barra =========
-  function tick(){
-    const now = new Date();
-    const diff = CONFIG.start - now;
-
-    // barra (aprox desde hoy -> evento)
-    const totalTime = CONFIG.start - new Date(2025, 11, 1);
-    const progress = Math.max(0, Math.min(100, (diff / totalTime) * 100));
-    const bar = $("energyBar");
-    if(bar) bar.style.width = progress + "%";
-
-    if(diff <= 0){
-      $("d").textContent = "00";
-      $("h").textContent = "00";
-      $("m").textContent = "00";
-      $("s").textContent = "00";
-      $("countNote").textContent = "¡Hoy es el día! 🥳🕷️";
-      $("badgeText").textContent = "¡Es hoy!";
-      return;
+      if(note) msg += `\n📝 Nota: ${note}`;
+      return msg;
     }
 
-    const sec = Math.floor(diff/1000);
-    const days = Math.floor(sec / 86400);
-    const hours = Math.floor((sec % 86400) / 3600);
-    const mins = Math.floor((sec % 3600) / 60);
-    const secs = sec % 60;
+    // ========= Countdown + barra =========
+    function tick(){
+      const now = new Date();
+      const diff = CONFIG.start - now;
 
-    $("d").textContent = pad(days);
-    $("h").textContent = pad(hours);
-    $("m").textContent = pad(mins);
-    $("s").textContent = pad(secs);
-    $("countNote").textContent = `Faltan ${days} día(s) para la misión 🕸️`;
-  }
+      // Barra: “escudo” que se VACÍA conforme se acerca el evento (100% -> 0%)
+      const anchor = new Date(2025, 11, 1); // ajusta si quieres otra fecha base
+      const totalTime = CONFIG.start - anchor;
+      const progress = totalTime > 0 ? (diff / totalTime) * 100 : 0;
 
-  // ========= Init (Render + listeners) =========
-  (function init(){
-    // Render base
-    $("message").textContent = CONFIG.message;
-    $("nameText").textContent = CONFIG.celebrantName;
-    $("dateText").textContent = CONFIG.dateText;
-    $("timeText").textContent = CONFIG.timeText;
-    $("placeText").textContent = CONFIG.placeText;
-    $("addressText").textContent = CONFIG.addressText;
-    $("footer").textContent = "Evento: " + formatDateTime(CONFIG.start);
+      const bar = $("energyBar");
+      if(bar) bar.style.width = Math.max(0, Math.min(100, progress)) + "%";
 
-    applyHostCustomization();
+      if(diff <= 0){
+        $("d").textContent = "00";
+        $("h").textContent = "00";
+        $("m").textContent = "00";
+        $("s").textContent = "00";
+        $("countNote").textContent = "¡Hoy es el día! 🥳🕷️";
+        $("badgeText").textContent = "¡Es hoy!";
+        return;
+      }
 
-    // Links
-    const mapsQuery = encodeURIComponent(`${CONFIG.placeText} ${CONFIG.addressText}`);
-    $("mapsBtn").href = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
-    $("musicBtn").href = "https://www.youtube.com/watch?v=ApXoWvfEYVU";
+      const sec = Math.floor(diff/1000);
+      const days = Math.floor(sec / 86400);
+      const hours = Math.floor((sec % 86400) / 3600);
+      const mins = Math.floor((sec % 3600) / 60);
+      const secs = sec % 60;
 
-    // Form dynamic
-    //renderGuestNameInputs();
+      $("d").textContent = pad(days);
+      $("h").textContent = pad(hours);
+      $("m").textContent = pad(mins);
+      $("s").textContent = pad(secs);
+      $("countNote").textContent = `Faltan ${days} día(s) para la misión 🕸️`;
+    }
 
-    // Listeners form
-    $("guests")?.addEventListener("change", ()=>{
+    // ========= Init (Render + listeners) =========
+    (function init(){
+      // Render base
+      $("message").textContent = CONFIG.message;
+      $("nameText").textContent = CONFIG.celebrantName;
+      $("dateText").textContent = CONFIG.dateText;
+      $("timeText").textContent = CONFIG.timeText;
+      $("placeText").textContent = CONFIG.placeText;
+      $("addressText").textContent = CONFIG.addressText;
+      $("footer").textContent = "Evento: " + formatDateTime(CONFIG.start);
+
+      applyHostCustomization();
+
+      // Links
+      const mapsQuery = encodeURIComponent(`${CONFIG.placeText} ${CONFIG.addressText}`);
+      $("mapsBtn").href = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
+      $("musicBtn").href = "https://www.youtube.com/watch?v=ApXoWvfEYVU";
+
+      // Form dynamic
       renderGuestNameInputs();
-      updateRsvpVisibility();
-    });
 
-    ["guestName","guestPhone","note"].forEach(id=>{
-      $(id)?.addEventListener("input", updateRsvpVisibility);
-    });
+      // Listeners form
+      $("guests")?.addEventListener("change", ()=>{
+        renderGuestNameInputs();
+        updateRsvpVisibility();
+      });
 
-    document.addEventListener("input", (e)=>{
-      if(e.target && String(e.target.id).startsWith("guestN")) updateRsvpVisibility();
-    });
+      ["guestName","guestPhone","note"].forEach(id=>{
+        $(id)?.addEventListener("input", updateRsvpVisibility);
+      });
 
-    // asistencia
-    $("attendYes")?.addEventListener("change", ()=>{
+      document.addEventListener("input", (e)=>{
+        if(e.target && String(e.target.id).startsWith("guestN")) updateRsvpVisibility();
+      });
+
+      // asistencia
+      $("attendYes")?.addEventListener("change", ()=>{
+        updateAttendUI();
+        updateRsvpVisibility();
+      });
+      $("attendNo")?.addEventListener("change", ()=>{
+        updateAttendUI();
+        updateRsvpVisibility();
+      });
       updateAttendUI();
       updateRsvpVisibility();
-    });
-    $("attendNo")?.addEventListener("change", ()=>{
-      updateAttendUI();
-      updateRsvpVisibility();
-    });
-    updateAttendUI();
-    updateRsvpVisibility();
 
-    // Copiar confirmación
-    $("copyConfirmBtn")?.addEventListener("click", ()=>{
-      const text = $("confirmPreview")?.textContent || "";
-      if(text) copyText(text);
-    });
+      // Copiar confirmación
+      $("copyConfirmBtn")?.addEventListener("click", ()=>{
+        const text = $("confirmPreview")?.textContent || "";
+        if(text) copyText(text);
+      });
 
-    // Enviar registro (email)
-    $("rsvpBtn")?.addEventListener("click", async ()=>{
-     /* if(!isAttending()){
-        toast("Marcaste que no asistes. No se enviará registro.");
-        return;
-      }*/
+      // Enviar registro (email)
+      $("rsvpBtn")?.addEventListener("click", async ()=>{
+        const msg = buildRsvpMessage();
+        showConfirmationBox(msg);
 
-      const msg = buildRsvpMessage();
-      showConfirmationBox(msg);
-
-      // Si todavía no tienes endpoint real, no mandes nada:
-      if(!CONFIG.emailEndpoint || CONFIG.emailEndpoint.includes("XXXXYYYY")){
-        toast("⚠️ Falta configurar Formspree.");
-        return;
-      }
-
-      const data = new FormData();
-      data.append("mensaje", msg);
-      data.append("host", getHostFromURL());
-      data.append("registro", ($("guestName").value || "").trim());
-      data.append("telefono", ($("guestPhone").value || "").trim());
-      data.append("invitados", $("guests").value);
-
-      try{
-        const res = await fetch(CONFIG.emailEndpoint, {
-          method: "POST",
-          body: data,
-          headers: { "Accept": "application/json" }
-        });
-
-            if(res.ok){
-              if(isAttending()){
-                toast("✅ Confirmación enviada");
-              } else {
-                toast("❌ Aviso de no asistencia enviado");
-              }
-            }
-          toast("✅ Registro enviado por correo");
-        }else{
-          toast("⚠️ No se pudo enviar. Intenta de nuevo.");
+        // Si todavía no tienes endpoint real, no mandes nada:
+        if(!CONFIG.emailEndpoint || CONFIG.emailEndpoint.includes("XXXXYYYY")){
+          toast("⚠️ Falta configurar Formspree.");
+          return;
         }
-      }catch{
-        toast("⚠️ Sin conexión o error enviando el registro.");
+
+        const data = new FormData();
+        data.append("mensaje", msg);
+        data.append("host", getHostFromURL());
+        data.append("registro", ($("guestName").value || "").trim());
+        data.append("telefono", ($("guestPhone").value || "").trim());
+        data.append("invitados", $("guests").value);
+        data.append("asistencia", isAttending() ? "si" : "no");
+
+        if(parseInt($("guests").value, 10) === 2){
+          data.append("acompanante", ($("guestN2")?.value || "").trim());
+        }
+        data.append("nota", ($("note").value || "").trim());
+
+        try{
+          const res = await fetch(CONFIG.emailEndpoint, {
+            method: "POST",
+            body: data,
+            headers: { "Accept": "application/json" }
+          });
+
+          if(res.ok){
+            toast(isAttending() ? "✅ Confirmación enviada" : "❌ Aviso de no asistencia enviado");
+          }else{
+            toast("⚠️ No se pudo enviar. Intenta de nuevo.");
+          }
+        }catch{
+          toast("⚠️ Sin conexión o error enviando el registro.");
+        }
+      });
+
+      // Countdown
+      tick();
+      setInterval(tick, 1000);
+
+      // Calendario
+      function toICSDate(d){
+        const z = new Date(d.getTime() - d.getTimezoneOffset()*60000);
+        return z.toISOString().replace(/[-:]/g,"").split(".")[0] + "Z";
       }
-    });
 
-    // Countdown
-    tick();
-    setInterval(tick, 1000);
+      $("icsBtn")?.addEventListener("click", ()=>{
+        const start = CONFIG.start;
+        const end = new Date(start.getTime() + CONFIG.durationMinutes*60000);
+        const uid = (crypto?.randomUUID ? crypto.randomUUID() : Date.now()+"@spiderman");
 
-    // Calendario
-    function toICSDate(d){
-      const z = new Date(d.getTime() - d.getTimezoneOffset()*60000);
-      return z.toISOString().replace(/[-:]/g,"").split(".")[0] + "Z";
-    }
-
-    $("icsBtn")?.addEventListener("click", ()=>{
-      const start = CONFIG.start;
-      const end = new Date(start.getTime() + CONFIG.durationMinutes*60000);
-      const uid = (crypto?.randomUUID ? crypto.randomUUID() : Date.now()+"@spiderman");
-
-      const ics =
+        const ics =
 `BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//Invitacion Jesús Isma//ES
@@ -788,18 +786,18 @@ LOCATION:${CONFIG.placeText} - ${CONFIG.addressText}
 END:VEVENT
 END:VCALENDAR`;
 
-      const blob = new Blob([ics], {type:"text/calendar;charset=utf-8"});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `Cumple_SpiderMan_${CONFIG.celebrantName}.ics`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
-      toast("Calendario descargado 📅");
-    });
-  })();
-</script>
+        const blob = new Blob([ics], {type:"text/calendar;charset=utf-8"});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `Cumple_SpiderMan_${CONFIG.celebrantName}.ics`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+        toast("Calendario descargado 📅");
+      });
+    })();
+  </script>
 </body>
 </html>
