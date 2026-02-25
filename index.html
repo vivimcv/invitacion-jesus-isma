@@ -492,7 +492,8 @@
     if(!note) return;
 
     if(isAttending()){
-      note.textContent = "😎 Llena tus datos y confirma tu registro.";
+      note.textContent = "😎 Llena tus datos para confirmar tu registro.";
+      note.style.fontSize = "24px";   // Cambia el número al tamaño que quieras
     }else{
       note.textContent = "Gracias por avisar 🙌 No se enviará registro.";
     }
