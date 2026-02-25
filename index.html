@@ -488,16 +488,15 @@
   }
 
   function updateAttendUI(){
-    const note = $("attendNote");
-    if(!note) return;
+  const note = $("attendNote");
+  if(!note) return;
 
-    if(isAttending()){
-      note.textContent = "😎 Llena tus datos para confirmar tu registro.";
-      note.style.fontSize = "24px";   // Cambia el número al tamaño que quieras
-    }else{
-      note.textContent = "Gracias por avisar 🙌 No se enviará registro.";
-    }
+  if(isAttending()){
+    note.textContent = "😎 Llena tus datos y confirma tu registro.";
+  }else{
+    note.textContent = "🙏 Gracias por avisar. Escribe tu nombre para registrar que no asistirás.";
   }
+}
 
   // ========= Form dinámico =========
     function renderGuestNameInputs(){
@@ -529,32 +528,43 @@
       wrap.appendChild(input);
     }
     function isFormReady(){
-      const registro = ($("guestName")?.value || "").trim();
-      const phone = ($("guestPhone")?.value || "").trim();
-      const count = parseInt($("guests")?.value || "1", 10) || 1;
+  const registro = ($("guestName")?.value || "").trim();
+  const phone = ($("guestPhone")?.value || "").trim();
+  const count = parseInt($("guests")?.value || "1", 10) || 1;
 
-      if(!registro) return false;
-      if(!phone) return false;
+  // SIEMPRE pedimos al menos el nombre de registro
+  if(!registro) return false;
 
-      if(count === 2){
-        const acomp = ($("guestN2")?.value || "").trim();
-        if(!acomp) return false;
-      }
+  // Si NO asiste: con el nombre basta (teléfono opcional)
+  if(!isAttending()){
+    return true;
+  }
 
-      return true;
-    }
+  // Si SÍ asiste: pedimos también teléfono
+  if(!phone) return false;
+
+  // Si son 2: pide acompañante (solo si tú lo estás usando)
+  if(count === 2){
+    const acomp = ($("guestN2")?.value || "").trim();
+    if(!acomp) return false;
+  }
+
+  return true;
+}
 
   function updateRsvpVisibility(){
-    const wrap = $("rsvpWrap");
-    if(!wrap) return;
+  const wrap = $("rsvpWrap");
+  const btn = $("rsvpBtn");
+  if(!wrap || !btn) return;
 
-    if(!isAttending()){
-      wrap.style.display = "none";
-      return;
-    }
-
-    wrap.style.display = isFormReady() ? "block" : "none";
+  if(isAttending()){
+    btn.textContent = "✅ Confirmar registro";
+  }else{
+    btn.textContent = "❌ Enviar aviso de no asistencia";
   }
+
+  wrap.style.display = isFormReady() ? "block" : "none";
+}
 
   // ========= Confirmación (recuadro + copiar) =========
   function showConfirmationBox(text){
