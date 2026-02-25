@@ -701,10 +701,10 @@ Acompañante: ${names.length ? names[0] : "—"}Asistencia: ${isAttending() ? "�
 
     // Enviar registro (email)
     $("rsvpBtn")?.addEventListener("click", async ()=>{
-      if(!isAttending()){
+     /* if(!isAttending()){
         toast("Marcaste que no asistes. No se enviará registro.");
         return;
-      }
+      }*/
 
       const msg = buildRsvpMessage();
       showConfirmationBox(msg);
@@ -729,7 +729,13 @@ Acompañante: ${names.length ? names[0] : "—"}Asistencia: ${isAttending() ? "�
           headers: { "Accept": "application/json" }
         });
 
-        if(res.ok){
+            if(res.ok){
+              if(isAttending()){
+                toast("✅ Confirmación enviada");
+              } else {
+                toast("❌ Aviso de no asistencia enviado");
+              }
+            }
           toast("✅ Registro enviado por correo");
         }else{
           toast("⚠️ No se pudo enviar. Intenta de nuevo.");
